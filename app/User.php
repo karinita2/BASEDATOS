@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Escuelas;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nacionalidad', 'cedula', 'apellido1','apellido2','nombre1','nombre2','fe_nac','edo_civil','sexo','lugar_nacimiento','religion', 'direccion','telefono_hab','telefono_cel', 'email', 'estado_id', 'municipio_id','parroquia_id'
     ];
 
     /**
@@ -23,4 +23,35 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    
+    public function estado()
+    {
+
+        return $this->belongsTo('App\Estado');
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo('App\Municipio');
+    }
+
+    public function parroquia()
+    {
+        return $this->belongsTo('App\Parroquia');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo('App\Rol');
+    }
+
+
+
+
+
+
+
+
+
 }
