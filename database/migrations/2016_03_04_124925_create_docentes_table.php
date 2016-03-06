@@ -14,10 +14,10 @@ class CreateDocentesTable extends Migration
     {
         Schema::create('docentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('trabajador_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
-        $table->foreign('trabajador_id')->references('usuario_id')->on('trabajadores');
+        $table->foreign('user_id')->references('user_id')->on('trabajadores');
         });
 
         Schema::create('materia_docente', function (Blueprint $table) {
@@ -27,7 +27,7 @@ class CreateDocentesTable extends Migration
             $table->timestamps();
 
             $table->foreign('materia_id')->references('id')->on('materias');
-            $table->foreign('docente_id')->references('trabajador_id')->on('docentes');
+            $table->foreign('docente_id')->references('user_id')->on('docentes');
 
             
         });

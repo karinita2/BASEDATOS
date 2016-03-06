@@ -12,7 +12,7 @@ class CreateCMedicasTable extends Migration
      */
     public function up()
     {
-        Schema::create('c_medicas', function (Blueprint $table) {
+        Schema::create('cmedicas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cmedica');
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateCMedicasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('c_medicas');
+        Schema::drop('cmedicas');
     }
 }

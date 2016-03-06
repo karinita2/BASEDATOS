@@ -21,11 +21,11 @@ class CreateTrabajadorsTable extends Migration
 
             $table->integer('nomina_id')->unsigned();
             $table->integer('filial_id')->unsigned();
-            $table->integer('usuario_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
             $table->foreign('nomina_id')->references('id')->on('nominas');
             $table->foreign('filial_id')->references('id')->on('filials');
-            $table->foreign('usuario_id')->references('id')->on('create_users_table');
+            $table->foreign('user_id')->references('id')->on('users');
             //$table->integer('parroquia_id')->unsigned();
 
 

@@ -14,12 +14,12 @@ class CreateResponsablesTable extends Migration
     {
         Schema::create('responsables', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('usuario_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->enum('vive_con_estudiante', ['S','N'])->default('S');
             $table->enum('es_representante', ['S','N'])->default('N');
             $table->timestamps();
 
-            $table->foreign('usuario_id')->references('usuario_id')->on('trabajadores');
+            $table->foreign('user_id')->references('user_id')->on('trabajadores');
 
         });
     }
