@@ -16,6 +16,10 @@ class Docente extends Model
         return $this->belongsToMany('App\Materia');
     }
 
+    public function trabajador() 
+    {
+        return $this->belongsTo('App\Trabajador');
+    }
 
 
 }

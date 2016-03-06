@@ -36,5 +36,10 @@ class Trabajador extends Model
 
     }
 
+    public function docente() 
+    {
+        return $this->hasOne('App\Docente');
+
+    }
 
 }
