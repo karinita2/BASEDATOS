@@ -23,7 +23,18 @@ class Trabajador extends Model
     	return $this->belongsTo('App\Nomina');
     }
 
+    
+    public function user() 
+    {
+        return $this->belongsTo('App\User');
 
+    }
+
+    public function responsable() 
+    {
+        return $this->hasOne('App\Responsable');
+
+    }
 
 
 }

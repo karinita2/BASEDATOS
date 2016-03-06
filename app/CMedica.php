@@ -9,4 +9,12 @@ class CMedica extends Model
     protected $table = "c_medicas";
 
     protected $fillable = ['cmedica'];
+
+    public function alumnos() 
+    {
+        return $this->belongsToMany('App\Alumno');
+    }
+
+
+
 }

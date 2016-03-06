@@ -37,9 +37,20 @@ class Alumno extends Model
         return $this->belongsTo('App\Responsable');
     }
 
+    public function cmedicas() 
+    {
+        return $this->belongsToMany('App\CMedica');
+    }
 
-
-
+    public function actividades() 
+    {
+        return $this->belongsToMany('App\Actividad');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
 
 }

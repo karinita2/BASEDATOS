@@ -12,22 +12,27 @@ class Responsable extends Model
 
     protected $fillable = ['vive_con_estudiante', 'es_representante'];
 
-    public function talla()
+
+    public function trabajador()
     {
-    	return $this->belongsTo('App\Talla');
+        return $this->belongsTo('App\Trabajador');
     }
 
-    public function talla()
+    public function responsable() 
     {
-    	return $this->belongsTo('App\Talla');
-    }
+        return $this->hasOne('App\Alumno');
 
-    public function talla()
+    }
+    public function padre() 
     {
-    	return $this->belongsTo('App\Talla');
+        return $this->hasOne('App\Alumno');
+
     }
+    public function madre() 
+    {
+        return $this->hasOne('App\Alumno');
 
-
+    }
 
 
 }

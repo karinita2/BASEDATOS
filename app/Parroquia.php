@@ -17,6 +17,9 @@ class Parroquia extends Model
     	return $this->hasMany('App\User');
     }
 
-
+    public function municipio()
+    {
+    	return $this->belongsTo('App\Municipio');
+    }
 
 }
