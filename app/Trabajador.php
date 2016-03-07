@@ -29,10 +29,11 @@ class Trabajador extends Model
         return $this->belongsTo('App\User');
 
     }
-
+    
+    //Relacion responsable-trabajador One To One
     public function responsable() 
     {
-        return $this->hasOne('App\Responsable');
+        return $this->hasOne('App\Responsable','id','id');
 
     }
 

@@ -21,20 +21,21 @@ class Alumno extends Model
     {
     	return $this->belongsTo('App\Talla');
     }
-
+    
+    //Relacion alumno-responsable One To One
     public function representante()
     {
-        return $this->belongsTo('App\Responsable');
+        return $this->belongsTo('App\Responsable','representante_id','id');
     }
 
     public function padre()
     {
-        return $this->belongsTo('App\Responsable');
+        return $this->belongsTo('App\Responsable','padre_id','id');
     }
 
     public function madre()
     {
-        return $this->belongsTo('App\Responsable');
+        return $this->belongsTo('App\Responsable','madre_id','id');
     }
 
     public function cmedicas() 

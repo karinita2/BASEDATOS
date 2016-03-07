@@ -86,8 +86,8 @@ $factory->define(App\Trabajador::class, function (Faker\Generator $faker) {
         'lugar_trabajo' => $faker->company,
         'departamento'   => $faker->company,
         'telefono_trabajo'   => $faker->phoneNumber,
-        'nomina_id' => 1,
-        'filial_id' => 1,
+        'nomina_id' => $faker->numberBetween(1,4),
+        'filial_id' => $faker->numberBetween(1,4),
         'id' => 1,
  
     ];
@@ -112,5 +112,38 @@ $factory->define(App\Materia::class, function (Faker\Generator $faker) {
  
     ];
 });      
+ 
+$factory->define(App\Responsable::class, function (Faker\Generator $faker) {
+    return [
+        'id'  => 1,
+        'vive_con_estudiante' => 'S',
+        'es_representante' => 'S',
+    ];
+});        
 
-         
+$factory->define(App\Talla::class, function (Faker\Generator $faker) {
+    return [
+        'talla'  => $faker->name,
+        
+    ];
+});  
+
+$factory->define(App\Ruta::class, function (Faker\Generator $faker) {
+    return [
+        'ruta'  => $faker->name,
+        
+    ];
+});  
+
+$factory->define(App\Alumno::class, function (Faker\Generator $faker) {
+    return [
+        'id'  => $faker->numberBetween(1,2),
+        'ruta_id' => 1,
+        'representante_id' => 1,
+        'padre_id' => 1,
+        'madre_id' => 1,
+        'talla_id' => 1,
+    ];
+});        
+
+
