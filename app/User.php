@@ -1,6 +1,6 @@
 <?php
 
-namespace Escuelas;
+namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

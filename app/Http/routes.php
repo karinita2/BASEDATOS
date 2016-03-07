@@ -10,11 +10,16 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*comente esto
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+Route::get('/', function () {
+	$instituciones = App\Institucion::all();
 
+    return View::make('institucion')->with('instituciones', $instituciones);
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes

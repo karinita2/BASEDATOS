@@ -15,16 +15,16 @@ class CreateGradosTable extends Migration
         Schema::create('grados', function (Blueprint $table) {
             $table->increments('id');
             $table->string('grado');
-            $table->integer('institucion_id')->unsigned();
+            //$table->integer('institucion_id')->unsigned();
 
 
-            $table->foreign('institucion_id')->references('id')->on('instituciones');
+            //$table->foreign('institucion_id')->references('id')->on('instituciones');
             $table->timestamps();
         });
 
         // institucion_grado -> tabla pivot
 
-        Schema::create('institucion_grado', function (Blueprint $table) {
+        Schema::create('grado_institucion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('institucion_id')->unsigned();
             $table->integer('grado_id')->unsigned();
