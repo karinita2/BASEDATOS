@@ -19,7 +19,7 @@ class CreateMateriasTable extends Migration
         });
 
 
-        Schema::create('seccion_materia', function (Blueprint $table) {
+        Schema::create('materia_seccion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('seccion_id')->unsigned();
             $table->integer('materia_id')->unsigned();
@@ -43,7 +43,7 @@ class CreateMateriasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('seccion_materia');
+        Schema::drop('materia_seccion');
         Schema::drop('materias');
     }
 }

@@ -23,7 +23,6 @@ class CreateGradosTable extends Migration
         });
 
         // institucion_grado -> tabla pivot
-
         Schema::create('grado_institucion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('institucion_id')->unsigned();
@@ -46,7 +45,7 @@ class CreateGradosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('institucion_grado');
+        Schema::drop('grado_institucion');
         Schema::drop('grados');
     }
 }

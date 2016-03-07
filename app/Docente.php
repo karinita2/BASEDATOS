@@ -18,7 +18,7 @@ class Docente extends Model
 
     public function trabajador() 
     {
-        return $this->belongsTo('App\Trabajador');
+        return $this->belongsTo('App\Trabajador','id','id');
     }
 
 

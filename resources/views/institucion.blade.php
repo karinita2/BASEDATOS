@@ -1,9 +1,9 @@
-{{ $instituciones->find(2)->institucion }}
+{{ $grados->find(1)->grado }}
 
 <h1>
-@foreach ($instituciones->find(2)->grados as $grado)
+@foreach ($grados->find(1)->secciones as $seccion)
     
-    {{ $grado->grado }}
+    {{ $seccion->seccion }}
 
 @endforeach
 </h1>

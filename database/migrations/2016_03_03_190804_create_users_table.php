@@ -61,6 +61,19 @@ class CreateUsersTable extends Migration
         });
 
 
+        Schema::create('nivel_estudio_user', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('nivel_estudio_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->timestamps();
+
+            $table->foreign('nivel_estudio_id')->references('id')->on('nivel_estudios');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            
+        });
+
+
 
 
 
@@ -74,6 +87,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::drop('rol_user');
+        Schema::drop('nivel_estudio_user');
         Schema::drop('users');
     }
 }

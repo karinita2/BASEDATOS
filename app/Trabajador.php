@@ -9,7 +9,7 @@ class Trabajador extends Model
     //
     protected $table = "trabajadores";
 
-    protected $fillable = ['profesion', 'lugar_trabajo', 'departamento', 'telefono_trabajo','usuario_id'];
+    protected $fillable = ['profesion', 'lugar_trabajo', 'departamento', 'telefono_trabajo'];
 
 
     public function filial()
@@ -38,7 +38,7 @@ class Trabajador extends Model
 
     public function docente() 
     {
-        return $this->hasOne('App\Docente');
+        return $this->hasOne('App\Docente','id','id');
 
     }
 

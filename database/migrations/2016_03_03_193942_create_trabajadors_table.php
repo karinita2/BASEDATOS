@@ -13,7 +13,9 @@ class CreateTrabajadorsTable extends Migration
     public function up()
     {
         Schema::create('trabajadores', function (Blueprint $table) {
-            $table->increments('id');
+            //$table->increments('id');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
             $table->string('profesion', 100);
             $table->string('lugar_trabajo', 100);
             $table->string('departamento', 100);
@@ -21,11 +23,15 @@ class CreateTrabajadorsTable extends Migration
 
             $table->integer('nomina_id')->unsigned();
             $table->integer('filial_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            //$table->integer('')
+            
+
+
+
 
             $table->foreign('nomina_id')->references('id')->on('nominas');
             $table->foreign('filial_id')->references('id')->on('filials');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('id')->references('id')->on('users');
             //$table->integer('parroquia_id')->unsigned();
 
 

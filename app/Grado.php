@@ -16,6 +16,7 @@ class Grado extends Model
         return $this->belongsToMany('App\Institucion');
     }
     
+    //Relacion Grado-Seccion - Many to Many
     public function secciones() 
     {
         return $this->belongsToMany('App\Seccion');

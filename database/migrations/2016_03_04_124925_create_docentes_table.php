@@ -13,21 +13,23 @@ class CreateDocentesTable extends Migration
     public function up()
     {
         Schema::create('docentes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            //$table->increments('id');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
+            //$table->integer('user_id')->unsigned();
             $table->timestamps();
 
-        $table->foreign('user_id')->references('user_id')->on('trabajadores');
+        $table->foreign('id')->references('id')->on('trabajadores');
         });
 
-        Schema::create('materia_docente', function (Blueprint $table) {
+        Schema::create('docente_materia', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('materia_id')->unsigned();
             $table->integer('docente_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('materia_id')->references('id')->on('materias');
-            $table->foreign('docente_id')->references('user_id')->on('docentes');
+            $table->foreign('docente_id')->references('id')->on('docentes');
 
             
         });
@@ -42,7 +44,7 @@ class CreateDocentesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('materia_docente');
+        Schema::drop('docente_materia');
         Schema::drop('docentes');
     }
 }

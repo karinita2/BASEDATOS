@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 */
 Route::get('/', function () {
-	$instituciones = App\Institucion::all();
+	$grados = App\Grado::all();
 
-    return View::make('institucion')->with('instituciones', $instituciones);
+    return View::make('institucion')->with('grados', $grados);
 });
 /*
 |--------------------------------------------------------------------------
