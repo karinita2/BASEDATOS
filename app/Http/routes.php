@@ -20,6 +20,11 @@ Route::get('/', function () {
 
     return View::make('institucion')->with('grados', $grados);
 });
+
+Route::group(['prefix' => 'registro'], function () {
+	
+	Route::resource('alumnos', 'AlumnosController');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
