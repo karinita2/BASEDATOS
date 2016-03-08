@@ -51,13 +51,13 @@ class CreateAlumnosTable extends Migration
             
         });
 
-        Schema::create('cmedica_alumno', function (Blueprint $table) {
+        Schema::create('alumno_c_medica', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cmedica_id')->unsigned();
+            $table->integer('c_medica_id')->unsigned();
             $table->integer('alumno_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('cmedica_id')->references('id')->on('cmedicas');
+            $table->foreign('c_medica_id')->references('id')->on('c_medicas');
             $table->foreign('alumno_id')->references('id')->on('alumnos');
 
             
@@ -75,7 +75,7 @@ class CreateAlumnosTable extends Migration
     public function down()
     {
         Schema::drop('actividad_alumno');
-        Schema::drop('cmedica_alumno');
+        Schema::drop('alumno_c_medica');
         //Schema::drop('nivel_estudio_alumno');
         Schema::drop('alumnos');
     }

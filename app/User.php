@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Parroquia');
     }
 
-    public function rol()
+    public function roles()
     {
         return $this->belongsToMany('App\Rol');
     }
@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function alumno() 
     {
-        return $this->hasOne('App\Alumno');
+        return $this->hasOne('App\Alumno','id','id');
 
     }
 

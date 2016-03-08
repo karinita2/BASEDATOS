@@ -8,7 +8,7 @@ class CMedica extends Model
 {
     protected $table = "c_medicas";
 
-    protected $fillable = ['cmedica'];
+    protected $fillable = ['c_medica'];
 
     public function alumnos() 
     {

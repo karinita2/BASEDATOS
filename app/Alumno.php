@@ -38,7 +38,7 @@ class Alumno extends Model
         return $this->belongsTo('App\Responsable','madre_id','id');
     }
 
-    public function cmedicas() 
+    public function c_medicas() 
     {
         return $this->belongsToMany('App\CMedica');
     }
@@ -50,7 +50,7 @@ class Alumno extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','id','id');
     }
 
 
