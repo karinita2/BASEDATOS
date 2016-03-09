@@ -10,11 +10,13 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*comente esto
+
 Route::get('/', function () {
     return view('welcome');
 });
-*/
+
+
+/*
 Route::get('/', function () {
 	$grados = App\Grado::all();
 
