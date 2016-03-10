@@ -25,19 +25,19 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
+            <li><a href="{{ route('config.secciones.index') }}">Secciones</a></li>
+             <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
+            <li><a href="{{ route('config.rutas.index') }}">Rutas Escolares</a></li>
             <li><a href="{{ route('config.instituciones.index') }}">Instituciones</a></li>
-            <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
-            <li><a href="#">Secciones</a></li>
-            <li><a href="#">Materias</a></li>
-            <li><a href="#">Rutas Escolares</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Actividades</a></li>
-            <li><a href="#">Condiciones Médicas</a></li>
-            <li><a href="#">Tallas</a></li>
-            <li><a href="#">Niveles de Estudio</a></li>
+            <li><a href="{{ route('config.actividades.index') }}">Actividades</a></li>
+            <li><a href="{{ route('config.c_medicas.index') }}">Condiciones Médicas</a></li>
+            <li><a href="{{ route('config.tallas.index') }}">Tallas</a></li>
+            <li><a href="{{ route('config.nivel_estudios.index') }}">Niveles de Estudio</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Filiales</a></li>
-            <li><a href="#">Nóminas</a></li>
+            <li><a href="{{ route('config.filiales.index') }}">Filiales</a></li>
+            <li><a href="{{ route('config.nominas.index') }}">Nóminas</a></li>
           </ul>
         </li>
         

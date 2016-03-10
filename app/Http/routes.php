@@ -78,6 +78,86 @@ Route::group(['middleware' => 'web'], function () {
 			]);
 	});
 
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('secciones', 'SeccionesController');
+		Route::get('secciones/{id}/destroy', [
+			'uses' => 'SeccionesController@destroy',
+			'as'   => 'config.secciones.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('materias', 'MateriasController');
+		Route::get('materias/{id}/destroy', [
+			'uses' => 'MateriasController@destroy',
+			'as'   => 'config.materias.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('rutas', 'RutasController');
+		Route::get('rutas/{id}/destroy', [
+			'uses' => 'RutasController@destroy',
+			'as'   => 'config.rutas.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('actividades', 'ActividadesController');
+		Route::get('actividades/{id}/destroy', [
+			'uses' => 'ActividadesController@destroy',
+			'as'   => 'config.actividades.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('c_medicas', 'CMedicasController');
+		Route::get('c_medicas/{id}/destroy', [
+			'uses' => 'CMedicasController@destroy',
+			'as'   => 'config.c_medicas.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('tallas', 'TallasController');
+		Route::get('tallas/{id}/destroy', [
+			'uses' => 'TallasController@destroy',
+			'as'   => 'config.tallas.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('nivel_estudios', 'NivelEstudiosController');
+		Route::get('nivel_estudios/{id}/destroy', [
+			'uses' => 'NivelEstudiosController@destroy',
+			'as'   => 'config.nivel_estudios.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('filiales', 'FilialesController');
+		Route::get('filiales/{id}/destroy', [
+			'uses' => 'FilialesController@destroy',
+			'as'   => 'config.filiales.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('nominas', 'NominasController');
+		Route::get('nominas/{id}/destroy', [
+			'uses' => 'NominasController@destroy',
+			'as'   => 'config.nominas.destroy'
+			]);
+	});
 
 
 });
