@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Institucion;
 use Laracasts\Flash\Flash;
+use App\Http\Requests\InstitucionRequest;
 
-class AlumnosController extends Controller
+
+
+class InstitucionesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +18,8 @@ class AlumnosController extends Controller
      */
     public function index()
     {
-        Flash::message('Welcome aboard!');
-
-        redirect()->route('config.instituciones.index');
+        $instituciones = Institucion::orderBy('id', 'ASC')->paginate(5);
+        return view('config.instituciones.index')->with('instituciones', $instituciones);
     }
 
     /**
@@ -26,8 +29,7 @@ class AlumnosController extends Controller
      */
     public function create()
     {
-       //dd('hola esto es un mensaje');
-        return view('registro.alumnos.create');
+        return view('config.instituciones.create')->withErrors('errors',2);
     }
 
     /**
@@ -36,9 +38,16 @@ class AlumnosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InstitucionRequest $request)
     {
-        //
+
+        //Session::flash('flash_message', 'Mensaje de prueba');
+        $institucion = new Institucion($request->all());
+        $institucion->save();
+
+        Flash::success("Se ha registrado ".$institucion->institucion );
+       
+        return redirect()->route('config.instituciones.index');
     }
 
     /**
@@ -60,7 +69,8 @@ class AlumnosController extends Controller
      */
     public function edit($id)
     {
-        //
+         $institucion = Institucion::find($id);
+         return view('config.instituciones.edit')->with('institucion',$institucion);
     }
 
     /**
@@ -72,7 +82,11 @@ class AlumnosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $institucion = Institucion::find($id);
+        $institucion->fill($request->all());
+        $institucion->save();
+        return redirect()->route('config.instituciones.index');
+
     }
 
     /**
@@ -83,6 +97,12 @@ class AlumnosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $institucion = Institucion::find($id);
+        $institucion->delete();
+
+        Flash::warning("Se ha eliminado ".$institucion->institucion );
+
+        return redirect()->route('config.instituciones.index');
+
     }
 }

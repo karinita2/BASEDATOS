@@ -10,8 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
+ Route::get('/', function () {
     return view('welcome');
 });
 
@@ -22,11 +21,23 @@ Route::get('/', function () {
 
     return View::make('institucion')->with('grados', $grados);
 });
+*/
+Route::group(['prefix' => 'config'], function () {
+	
+	Route::resource('instituciones', 'InstitucionesController');
+	Route::get('instituciones/{id}/destroy', [
+		'uses' => 'InstitucionesController@destroy',
+		'as'   => 'config.instituciones.destroy'
+		]);
+});
 
-Route::group(['prefix' => 'registro'], function () {
+
+//Rutas para alumnos
+/*Route::group(['prefix' => 'registro'], function () {
 	
 	Route::resource('alumnos', 'AlumnosController');
-});
+});*/
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -40,4 +51,6 @@ Route::group(['prefix' => 'registro'], function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+
+
 });

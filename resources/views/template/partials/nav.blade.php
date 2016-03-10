@@ -25,7 +25,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Instituciones</a></li>
+            <li><a href="{{ route('config.instituciones.index') }}">Instituciones</a></li>
             <li><a href="#">Grados</a></li>
             <li><a href="#">Secciones</a></li>
             <li><a href="#">Materias</a></li>
@@ -65,3 +65,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+
