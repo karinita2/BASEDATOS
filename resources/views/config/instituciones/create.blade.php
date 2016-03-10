@@ -4,11 +4,6 @@
 
 @section('content')
 
-	
-
-{{ dd(Session::get('errors')) }}
-
-
 {!! Form::open(array('route' => 'config.instituciones.store', 'method' => 'POST')) !!}
     
 	    <div class="form-group">

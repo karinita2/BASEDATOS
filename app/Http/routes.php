@@ -10,9 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
- Route::get('/', function () {
-    return view('welcome');
-});
+
 
 
 /*
@@ -21,7 +19,7 @@ Route::get('/', function () {
 
     return View::make('institucion')->with('grados', $grados);
 });
-*/
+
 Route::group(['prefix' => 'config'], function () {
 	
 	Route::resource('instituciones', 'InstitucionesController');
@@ -31,7 +29,7 @@ Route::group(['prefix' => 'config'], function () {
 		]);
 });
 
-
+*/
 //Rutas para alumnos
 /*Route::group(['prefix' => 'registro'], function () {
 	
@@ -48,9 +46,38 @@ Route::group(['prefix' => 'config'], function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
+/*
 Route::group(['middleware' => ['web']], function () {
     //
+
+
+});
+*/
+Route::group(['middleware' => 'web'], function () {
+    //
+	Route::auth();
+	Route::get('/', function () {
+    	return view('welcome');
+	});
+	
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('instituciones', 'InstitucionesController');
+		Route::get('instituciones/{id}/destroy', [
+			'uses' => 'InstitucionesController@destroy',
+			'as'   => 'config.instituciones.destroy'
+			]);
+	});
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('grados', 'GradosController');
+		Route::get('grados/{id}/destroy', [
+			'uses' => 'GradosController@destroy',
+			'as'   => 'config.grados.destroy'
+			]);
+	});
+
 
 
 });

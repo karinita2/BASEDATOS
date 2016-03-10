@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Institucion;
+use App\Grado;
 use Laracasts\Flash\Flash;
-use App\Http\Requests\InstitucionRequest;
+use App\Http\Requests\GradoRequest;
 
-
-
-class InstitucionesController extends Controller
+class GradosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class InstitucionesController extends Controller
      */
     public function index()
     {
-        $instituciones = Institucion::orderBy('id', 'ASC')->paginate(5);
-        return view('config.instituciones.index')->with('instituciones', $instituciones);
+        $grados = Grado::orderBy('id', 'ASC')->paginate(5);
+        return view('config.grados.index')->with('grados', $grados);
     }
 
     /**
@@ -29,7 +28,7 @@ class InstitucionesController extends Controller
      */
     public function create()
     {
-        return view('config.instituciones.create');
+       return view('config.grados.create');
     }
 
     /**
@@ -38,16 +37,14 @@ class InstitucionesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InstitucionRequest $request)
+    public function store(GradoRequest $request)
     {
+        $grado = new Grado($request->all());
+        $grado->save();
 
-        //Session::flash('flash_message', 'Mensaje de prueba');
-        $institucion = new Institucion($request->all());
-        $institucion->save();
-
-        Flash::success("Se ha registrado ".$institucion->institucion );
+        Flash::success("Se ha registrado el grado ".$grado->institucion );
        
-        return redirect()->route('config.instituciones.index');
+        return redirect()->route('config.grados.index');
     }
 
     /**
@@ -69,8 +66,8 @@ class InstitucionesController extends Controller
      */
     public function edit($id)
     {
-         $institucion = Institucion::find($id);
-         return view('config.instituciones.edit')->with('institucion',$institucion);
+         $grado = Grado::find($id);
+         return view('config.grados.edit')->with('grado',$grado);
     }
 
     /**
@@ -82,12 +79,11 @@ class InstitucionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $institucion = Institucion::find($id);
-        $institucion->fill($request->all());
-        $institucion->save();
-        Flash::success("Se ha editado ".$institucion->institucion );
-        return redirect()->route('config.instituciones.index');
-
+        $grado = Grado::find($id);
+        $grado->fill($request->all());
+        $grado->save();
+        Flash::success("Se ha editado ".$grado->grado );
+        return redirect()->route('config.grados.index');
     }
 
     /**
@@ -98,12 +94,11 @@ class InstitucionesController extends Controller
      */
     public function destroy($id)
     {
-        $institucion = Institucion::find($id);
-        $institucion->delete();
+        $grado = Grado::find($id);
+        $grado->delete();
 
-        Flash::error("Se ha eliminado ".$institucion->institucion );
+        Flash::error("Se ha eliminado ".$grado->grado );
 
-        return redirect()->route('config.instituciones.index');
-
+        return redirect()->route('config.grados.index');
     }
 }
