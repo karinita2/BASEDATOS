@@ -15,9 +15,10 @@ class FilialesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $filiales = Filial::orderBy('id', 'ASC')->paginate(5);
+        //dd($request->filial);
+        $filiales = Filial::search($request->filial)->orderBy('id', 'ASC')->paginate(5);
         return view('config.filiales.index')->with('filiales', $filiales);
     }
 

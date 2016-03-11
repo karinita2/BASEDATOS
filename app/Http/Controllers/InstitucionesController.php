@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Institucion;
+use App\Ruta;
+use App\Grado;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\InstitucionRequest;
 
@@ -29,7 +31,11 @@ class InstitucionesController extends Controller
      */
     public function create()
     {
-        return view('config.instituciones.create');
+        
+        $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
+        //dd($grados);
+        return view('config.instituciones.create')
+        ->with('grados',$grados);
     }
 
     /**
@@ -41,9 +47,10 @@ class InstitucionesController extends Controller
     public function store(InstitucionRequest $request)
     {
 
-        //Session::flash('flash_message', 'Mensaje de prueba');
         $institucion = new Institucion($request->all());
         $institucion->save();
+
+        $institucion->grados()->sync($request->grado_id);
 
         Flash::success("Se ha registrado ".$institucion->institucion );
        

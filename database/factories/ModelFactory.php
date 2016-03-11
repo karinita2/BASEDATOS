@@ -127,10 +127,17 @@ $factory->define(App\Talla::class, function (Faker\Generator $faker) {
         
     ];
 });  
+$factory->define(App\Institucion::class, function (Faker\Generator $faker) {
+    return [
+        'institucion'  => $faker->name,
+        
+    ];
+}); 
 
 $factory->define(App\Ruta::class, function (Faker\Generator $faker) {
     return [
         'ruta'  => $faker->name,
+        'institucion_id' => 1,
         
     ];
 });  

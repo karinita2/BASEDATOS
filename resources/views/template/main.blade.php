@@ -3,6 +3,7 @@
 <head>
 	<title>@yield('title','Default') | Sistema de Escuelas</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }} ">
+	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/chosen/chosen.css') }} ">
 </head>
 <body>
 	@include('template.partials.nav')
@@ -21,6 +22,8 @@
 
 	<script src="{{ asset('plugins/jquery/js/jquery-2.2.1.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
+	<script src="{{ asset('plugins/chosen/chosen.jquery.js') }}"></script>
+	@yield('js')
 	
 </body>
 </html>

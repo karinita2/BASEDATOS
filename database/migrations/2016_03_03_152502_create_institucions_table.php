@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRutasTable extends Migration
+class CreateInstitucionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CreateRutasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rutas', function (Blueprint $table) {
+        Schema::create('instituciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ruta');
-            $table->integer('institucion_id')->unsigned();
+            $table->string('institucion');
             $table->timestamps();
-            $table->foreign('institucion_id')->references('id')->on('instituciones');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateRutasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('rutas');
+        Schema::drop('instituciones');
     }
 }
