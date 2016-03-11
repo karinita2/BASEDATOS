@@ -18,7 +18,7 @@ class CreateSeccionsTable extends Migration
             $table->timestamps();
         });
 
-
+        
         Schema::create('grado_seccion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('grado_id')->unsigned();

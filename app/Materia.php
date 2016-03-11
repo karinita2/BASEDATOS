@@ -11,15 +11,14 @@ class Materia extends Model
 
     protected $fillable = ['materia'];
 
-    public function secciones() 
+    public function grados() 
     {
-        return $this->belongsToMany('App\Seccion');
+        return $this->belongsToMany('App\Grado');
     }
     
     public function docentes() 
     {
         return $this->belongsToMany('App\Docente');
     }
-
 
 }

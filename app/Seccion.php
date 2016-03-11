@@ -11,12 +11,12 @@ class Seccion extends Model
 
     protected $fillable = ['seccion'];
 
-   
+   /*
     public function materias() 
     {
         return $this->belongsToMany('App\Materia');
     }
-
+*/
     //Relacion Seccion-Grado - Many to Many
     public function grados() 
     {
