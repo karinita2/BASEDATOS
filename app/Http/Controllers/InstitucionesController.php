@@ -77,7 +77,16 @@ class InstitucionesController extends Controller
     public function edit($id)
     {
          $institucion = Institucion::find($id);
-         return view('config.instituciones.edit')->with('institucion',$institucion);
+
+         $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
+
+         $my_grados = $institucion->grados->lists('id')->ToArray();
+
+         //dd($my_grados);
+         return view('config.instituciones.edit')
+         ->with('institucion',$institucion)
+         ->with('grados',$grados)
+         ->with('my_grados',$my_grados);
     }
 
     /**
@@ -89,9 +98,13 @@ class InstitucionesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->grado_id);
         $institucion = Institucion::find($id);
         $institucion->fill($request->all());
         $institucion->save();
+        $institucion->grados()->sync($request->grado_id);
+
+
         Flash::success("Se ha editado ".$institucion->institucion );
         return redirect()->route('config.instituciones.index');
 

@@ -21,7 +21,7 @@
 				    <td><a href="{{ route('config.instituciones.edit', $institucion->id ) }}" class="btn btn-warning">Institución <span class="glyphicon glyphicon-wrench" aria-hidden= "true"></span></a>
 
 				   
-				     <a href="{{ route('config.instituciones.destroy', $institucion->id ) }}" class="btn btn-info" onclick="return confirm('Seguro que desea eliminar la institucion?')">Rutas <span class="glyphicon glyphicon-road" aria-hidden= "true"></span> </a>
+				     <a href="{{ route('config.rutas.index' ) }}" class="btn btn-info">Rutas <span class="glyphicon glyphicon-road" aria-hidden= "true"></span> </a>
 
 
 					<a href="{{ route('config.instituciones.destroy', $institucion->id ) }}" class="btn btn-primary" onclick="return confirm('Seguro que desea eliminar la institucion?')">Grados <span class="glyphicon glyphicon-book" aria-hidden= "true"></span> </a>

@@ -103,6 +103,10 @@ Route::group(['middleware' => 'web'], function () {
 			'uses' => 'RutasController@destroy',
 			'as'   => 'config.rutas.destroy'
 			]);
+		Route::get('rutas/{id}/createwithparam', [
+			'uses' => 'RutasController@createwithparam',
+			'as'   => 'config.rutas.createwithparam'
+			]);
 	});
 
 	Route::group(['prefix' => 'config'], function () {

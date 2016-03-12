@@ -16,6 +16,11 @@ class Institucion extends Model
         return $this->belongsToMany('App\Grado');
     }
 
+    public function rutas()
+    {
+    	return $this->hasMany('App\Ruta');
+    }
+
 
 
 }

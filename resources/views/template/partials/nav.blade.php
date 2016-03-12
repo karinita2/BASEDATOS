@@ -25,11 +25,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
-            <li><a href="{{ route('config.secciones.index') }}">Secciones</a></li>
-             <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
-            <li><a href="{{ route('config.rutas.index') }}">Rutas Escolares</a></li>
             <li><a href="{{ route('config.instituciones.index') }}">Instituciones</a></li>
+            <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
+            <li><a href="{{ route('config.secciones.index') }}">Secciones</a></li>
+            <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
+            <li><a href="{{ route('config.rutas.index') }}">Rutas Escolares</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('config.actividades.index') }}">Actividades</a></li>
             <li><a href="{{ route('config.c_medicas.index') }}">Condiciones Médicas</a></li>

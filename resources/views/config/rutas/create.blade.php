@@ -10,6 +10,12 @@
 			{!! Form::label('ruta','Ruta') !!}
 			{!! Form::text('ruta',null, ['class' => 'form-control', 'placeholder' => 'Ruta', 'required'] ) !!}
 		</div>
+
+		<div class="form-group">
+			{!! Form::label('institucion_id','Institucion') !!}
+			{!! Form::select('institucion_id',$instituciones, null, ['class' => 'form-control  select-tag', 'required'] ) !!}
+
+		</div>
 	    
 	    <div class="form-group">
 			{!! Form::submit('Registrar', array('class' => 'btn btn-primary')) !!}

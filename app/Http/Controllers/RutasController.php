@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Ruta;
+use App\Institucion;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\RutaRequest;
 
@@ -18,6 +19,11 @@ class RutasController extends Controller
     public function index()
     {
         $rutas = Ruta::orderBy('id', 'ASC')->paginate(5);
+        
+        $rutas->each(function($rutas){
+            $rutas->institucion;
+
+        });
         return view('config.rutas.index')->with('rutas', $rutas);
     }
 
@@ -28,7 +34,20 @@ class RutasController extends Controller
      */
     public function create()
     {
-        return view('config.rutas.create');
+        $instituciones = Institucion::orderBy('institucion', 'ASC')->lists('institucion','id');
+
+        return view('config.rutas.create')
+        ->with('instituciones',$instituciones);
+    }
+
+    public function createwithparam($id)
+    {
+        /*
+                $instituciones = Institucion::orderBy('institucion', 'ASC')->lists('institucion','id');
+        return view('config.rutas.create')
+        ->with('instituciones',$instituciones);
+        */
+        return view('config.rutas.create')->with('institucion_id', $id);
     }
 
     /**
@@ -39,11 +58,15 @@ class RutasController extends Controller
      */
     public function store(RutaRequest $request)
     {
+        
+       //dd($request->all());
         $ruta = new Ruta($request->all());
         $ruta->save();
 
-        Flash::success("Se ha registrado la ruta: ".$ruta->ruta );
-   
+        //$ruta->grados()->sync($request->grado_id);
+
+        Flash::success("Se ha registrado ".$ruta->ruta );
+       
         return redirect()->route('config.rutas.index');
     }
 
@@ -55,7 +78,12 @@ class RutasController extends Controller
      */
     public function show($id)
     {
-        //
+        $rutas = Ruta::where('institucion_id','=',$id)->orderBy('id', 'ASC')->paginate(5);
+        $institucion = Institucion::find($id);
+
+        return view('config.rutas.index')
+        ->with('institucion', $institucion)
+        ->with('rutas', $rutas);
     }
 
     /**
@@ -67,7 +95,10 @@ class RutasController extends Controller
     public function edit($id)
     {
         $ruta = Ruta::find($id);
-         return view('config.rutas.edit')->with('ruta',$ruta);
+         $instituciones = Institucion::orderBy('institucion', 'ASC')->lists('institucion','id');
+         return view('config.rutas.edit')
+         ->with('ruta',$ruta)
+         ->with('instituciones',$instituciones);
     }
 
     /**
@@ -79,11 +110,14 @@ class RutasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->grado_id);
         $ruta = Ruta::find($id);
         $ruta->fill($request->all());
         $ruta->save();
+       
         Flash::success("Se ha editado ".$ruta->ruta );
         return redirect()->route('config.rutas.index');
+
     }
 
     /**
@@ -94,9 +128,12 @@ class RutasController extends Controller
      */
     public function destroy($id)
     {
-        $ruta = Ruta::find($id);
+        //$ruta =
+        $ruta = ruta::find($id);
         $ruta->delete();
+
         Flash::error("Se ha eliminado ".$ruta->ruta );
+
         return redirect()->route('config.rutas.index');
     }
 }
