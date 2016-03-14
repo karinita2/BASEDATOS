@@ -15,6 +15,29 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Sistema de Escuelas <span class="sr-only">(current)</span></a></li>
+
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ route('config.instituciones.index') }}">Instituciones</a></li>
+            <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
+            <li><a href="{{ route('config.secciones.index') }}">Secciones</a></li>
+            <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ route('config.instituciones_conf.index') }}">Configurar Institución</a></li>
+            <li><a href="{{ route('config.rutas.index') }}">Configurar Rutas Escolares</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ route('config.filiales.index') }}">Filiales</a></li>
+            <li><a href="{{ route('config.nominas.index') }}">Nóminas</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{ route('config.actividades.index') }}">Actividades</a></li>
+            <li><a href="{{ route('config.c_medicas.index') }}">Condiciones Médicas</a></li>
+            <li><a href="{{ route('config.tallas.index') }}">Tallas</a></li>
+            <li><a href="{{ route('config.nivel_estudios.index') }}">Niveles de Estudio</a></li>
+          </ul>
+        </li>
+
+
          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registro <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -22,25 +45,7 @@
             <li><a href="#">Docentes</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ route('config.instituciones.index') }}">Instituciones</a></li>
-            <li><a href="{{ route('config.grados.index') }}">Grados</a></li>
-            <li><a href="{{ route('config.secciones.index') }}">Secciones</a></li>
-            <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
-            <li><a href="{{ route('config.rutas.index') }}">Rutas Escolares</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="{{ route('config.actividades.index') }}">Actividades</a></li>
-            <li><a href="{{ route('config.c_medicas.index') }}">Condiciones Médicas</a></li>
-            <li><a href="{{ route('config.tallas.index') }}">Tallas</a></li>
-            <li><a href="{{ route('config.nivel_estudios.index') }}">Niveles de Estudio</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="{{ route('config.filiales.index') }}">Filiales</a></li>
-            <li><a href="{{ route('config.nominas.index') }}">Nóminas</a></li>
-          </ul>
-        </li>
-        
+               
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Evaluación <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -58,10 +63,11 @@
 
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Salir</a></li>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
 
-      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

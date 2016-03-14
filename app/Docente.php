@@ -10,11 +10,18 @@ class Docente extends Model
     protected $table = "docentes";
 
     //protected $fillable = ['cmedica'];
-
+    /*
     public function materias() 
     {
         return $this->belongsToMany('App\Materia');
     }
+    */
+
+    public function institucion_configs()
+    {
+        return $this->hasMany('App\InstitucionConfig');
+    }
+
 
     public function trabajador() 
     {

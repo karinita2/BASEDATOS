@@ -31,11 +31,9 @@ class InstitucionesController extends Controller
      */
     public function create()
     {
-        
-        $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
-        //dd($grados);
-        return view('config.instituciones.create')
-        ->with('grados',$grados);
+
+        return view('config.instituciones.create');
+
     }
 
     /**
@@ -49,8 +47,6 @@ class InstitucionesController extends Controller
 
         $institucion = new Institucion($request->all());
         $institucion->save();
-
-        $institucion->grados()->sync($request->grado_id);
 
         Flash::success("Se ha registrado ".$institucion->institucion );
        
@@ -78,15 +74,9 @@ class InstitucionesController extends Controller
     {
          $institucion = Institucion::find($id);
 
-         $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
-
-         $my_grados = $institucion->grados->lists('id')->ToArray();
-
-         //dd($my_grados);
+                 
          return view('config.instituciones.edit')
-         ->with('institucion',$institucion)
-         ->with('grados',$grados)
-         ->with('my_grados',$my_grados);
+         ->with('institucion',$institucion);
     }
 
     /**
@@ -102,9 +92,7 @@ class InstitucionesController extends Controller
         $institucion = Institucion::find($id);
         $institucion->fill($request->all());
         $institucion->save();
-        $institucion->grados()->sync($request->grado_id);
-
-
+       
         Flash::success("Se ha editado ".$institucion->institucion );
         return redirect()->route('config.instituciones.index');
 

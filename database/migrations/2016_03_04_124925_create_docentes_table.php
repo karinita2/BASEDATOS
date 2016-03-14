@@ -22,6 +22,7 @@ class CreateDocentesTable extends Migration
         $table->foreign('id')->references('id')->on('trabajadores');
         });
 
+        /*
         Schema::create('docente_materia', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('materia_id')->unsigned();
@@ -33,7 +34,7 @@ class CreateDocentesTable extends Migration
 
             
         });
-
+        */
 
     }
 
@@ -44,7 +45,7 @@ class CreateDocentesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('docente_materia');
+        //Schema::drop('docente_materia');
         Schema::drop('docentes');
     }
 }

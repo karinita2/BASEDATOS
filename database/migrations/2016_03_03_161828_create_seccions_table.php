@@ -18,7 +18,7 @@ class CreateSeccionsTable extends Migration
             $table->timestamps();
         });
 
-        
+        /*
         Schema::create('grado_seccion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('grado_id')->unsigned();
@@ -30,7 +30,7 @@ class CreateSeccionsTable extends Migration
 
             $table->timestamps();
         });
-
+        */
     }
 
     /**
@@ -40,7 +40,7 @@ class CreateSeccionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('grado_seccion');
+        //Schema::drop('grado_seccion');
         Schema::drop('secciones');
     }
 }

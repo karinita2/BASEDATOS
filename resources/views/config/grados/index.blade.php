@@ -19,7 +19,6 @@
 				<tr>
 					<td>{{ $grado->id }}</td>
 					<td>{{ $grado->grado }}</td>
-					<td>{{ $ruta->institucion->institucion }}</td>
 				    <td><a href="{{ route('config.grados.edit', $grado->id ) }}" class="btn btn-warning"><span class="glyphicon glyphicon-wrench" aria-hidden= "true"></span></a>
 
 				    <a href="{{ route('config.grados.destroy', $grado->id ) }}" class="btn btn-danger" onclick="return confirm('Seguro que desea eliminar el grado?')"><span class="glyphicon glyphicon-remove-circle" aria-hidden= "true"></span> </a>

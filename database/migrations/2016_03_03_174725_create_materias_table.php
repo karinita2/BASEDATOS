@@ -18,7 +18,7 @@ class CreateMateriasTable extends Migration
             $table->timestamps();
         });
 
-
+        /*
         Schema::create('materia_grado', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('grado_id')->unsigned();
@@ -30,7 +30,7 @@ class CreateMateriasTable extends Migration
 
             $table->timestamps();
         });
-
+        */
 
 
 
@@ -43,7 +43,7 @@ class CreateMateriasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('materia_grado');
+        //Schema::drop('materia_grado');
         Schema::drop('materias');
     }
 }

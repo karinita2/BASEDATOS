@@ -18,9 +18,15 @@ class Seccion extends Model
     }
 */
     //Relacion Seccion-Grado - Many to Many
+    /*
     public function grados() 
     {
         return $this->belongsToMany('App\Grado');
+    }
+    */
+    public function institucion_configs()
+    {
+        return $this->hasMany('App\InstitucionConfig');
     }
 
 

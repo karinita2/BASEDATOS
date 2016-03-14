@@ -68,6 +68,16 @@ Route::group(['middleware' => 'web'], function () {
 			'as'   => 'config.instituciones.destroy'
 			]);
 	});
+	
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('instituciones_conf', 'InstitucionesConfController');
+		Route::get('instituciones_conf/{id}/destroy', [
+			'uses' => 'InstitucionesConfController@destroy',
+			'as'   => 'config.instituciones_conf.destroy'
+			]);
+	});
+
 
 	Route::group(['prefix' => 'config'], function () {
 		

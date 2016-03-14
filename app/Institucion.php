@@ -11,14 +11,20 @@ class Institucion extends Model
 
     protected $fillable = ['institucion'];
 
+    /*
     public function grados() 
     {
         return $this->belongsToMany('App\Grado');
     }
-
+    */
     public function rutas()
     {
     	return $this->hasMany('App\Ruta');
+    }
+
+    public function institucion_configs()
+    {
+        return $this->hasMany('App\InstitucionConfig');
     }
 
 
