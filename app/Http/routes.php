@@ -53,6 +53,8 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 */
+
+
 Route::group(['middleware' => 'web'], function () {
     //
 	Route::auth();
@@ -63,12 +65,29 @@ Route::group(['middleware' => 'web'], function () {
 	Route::group(['prefix' => 'config'], function () {
 		
 		Route::resource('instituciones', 'InstitucionesController');
+		
 		Route::get('instituciones/{id}/destroy', [
 			'uses' => 'InstitucionesController@destroy',
 			'as'   => 'config.instituciones.destroy'
 			]);
-	});
 	
+		Route::get('/instituciones/{id}/getMunicipios', [
+			'uses' => 'InstitucionesController@getMunicipios',
+			'as'   => 'config.instituciones.getMunicipios'
+			]);
+
+		Route::get('/instituciones/{id}/getParroquias', [
+			'uses' => 'InstitucionesController@getParroquias',
+			'as'   => 'config.instituciones.getParroquias'
+			]);
+
+
+	});
+
+
+
+
+
 	Route::group(['prefix' => 'config'], function () {
 		
 		Route::resource('instituciones_conf', 'InstitucionesConfController');

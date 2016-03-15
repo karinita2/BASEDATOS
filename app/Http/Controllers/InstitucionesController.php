@@ -6,6 +6,9 @@ use App\Http\Requests;
 use App\Institucion;
 use App\Ruta;
 use App\Grado;
+use App\Estado;
+use App\Municipio;
+use App\Parroquia;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\InstitucionRequest;
 
@@ -31,8 +34,9 @@ class InstitucionesController extends Controller
      */
     public function create()
     {
-
-        return view('config.instituciones.create');
+        $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
+        return view('config.instituciones.create')
+        ->with('estados', $estados);;
 
     }
 
@@ -44,7 +48,7 @@ class InstitucionesController extends Controller
      */
     public function store(InstitucionRequest $request)
     {
-
+        //dd($request->all());
         $institucion = new Institucion($request->all());
         $institucion->save();
 
@@ -73,10 +77,12 @@ class InstitucionesController extends Controller
     public function edit($id)
     {
          $institucion = Institucion::find($id);
-
+         $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
                  
          return view('config.instituciones.edit')
-         ->with('institucion',$institucion);
+         ->with('institucion',$institucion)
+         ->with('estados',$estados);
+         ;
     }
 
     /**
@@ -114,4 +120,31 @@ class InstitucionesController extends Controller
         return redirect()->route('config.instituciones.index');
 
     }
+
+    public function getMunicipios(Request $request, $id)
+    {
+   
+        if($request->ajax()){
+            //return 'getRequest has loaded completely'.$id; 
+            $municipios = Municipio::municipios($id);
+            return response()->json($municipios);
+        }
+
+    }
+
+    public function getParroquias(Request $request, $id)
+    {
+        
+        if($request->ajax()){
+            
+            $parroquias = Parroquia::parroquias($id);
+            return response()->json($parroquias);
+        }
+
+    }
+
+
+
+
+
 }

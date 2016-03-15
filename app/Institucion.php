@@ -9,7 +9,7 @@ class Institucion extends Model
     //
     protected $table = "instituciones";
 
-    protected $fillable = ['institucion'];
+    protected $fillable = ['institucion', 'direccion', 'telefono', 'email', 'estado_id', 'municipio_id', 'parroquia_id' ];
 
     /*
     public function grados() 
@@ -30,3 +30,4 @@ class Institucion extends Model
 
 
 }
+

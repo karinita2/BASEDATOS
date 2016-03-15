@@ -9,7 +9,7 @@ class Municipio extends Model
     //
     protected $table = "municipios";
 
-    protected $fillable = ['municipio'];
+    protected $fillable = ['municipio', 'estado_id'];
 
     
     public function users()
@@ -27,5 +27,9 @@ class Municipio extends Model
     	return $this->hasMany('App\Parroquia');
     }
 
+    public static function municipios($id)
+    {
+        return Municipio::where('estado_id','=', $id)->get();
+    }
 
 }
