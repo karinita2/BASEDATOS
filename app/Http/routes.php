@@ -125,6 +125,22 @@ Route::group(['middleware' => 'web'], function () {
 			]);
 	});
 
+
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('materia_configs', 'MateriaConfigsController');
+		Route::get('materia_configs/{id}/destroy', [
+			'uses' => 'MateriaConfigsController@destroy',
+			'as'   => 'config.materia_configs.destroy'
+			]);
+	});
+
+
+
+
+
+
+
 	Route::group(['prefix' => 'config'], function () {
 		
 		Route::resource('rutas', 'RutasController');

@@ -25,6 +25,8 @@
             <li><a href="{{ route('config.materias.index') }}">Materias</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('config.instituciones_conf.index') }}">Configurar Institución</a></li>
+            <li><a href="{{ route('config.materia_configs.index') }}">Configurar Materias</a></li>
+
             <li><a href="{{ route('config.rutas.index') }}">Configurar Rutas Escolares</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('config.filiales.index') }}">Filiales</a></li>

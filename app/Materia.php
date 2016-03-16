@@ -23,9 +23,9 @@ class Materia extends Model
         return $this->belongsToMany('App\Docente');
     }
     */
-    /*public function institucion_configs()
+    public function materia_configs()
     {
-        return $this->hasMany('App\InstitucionConfig');
-    }*/
+        return $this->hasMany('App\MateriaConfig');
+    }
 
 }

@@ -111,7 +111,7 @@ class InstitucionesConfController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $institucion = Institucion::find($id);
+        $institucion = InstitucionConfig::find($id);
         $institucion->fill($request->all());
         $institucion->save();
        
@@ -127,6 +127,11 @@ class InstitucionesConfController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $materia_config = InstitucionConfig::find($id);
+        $materia_config->delete();
+
+        Flash::error("Se ha eliminado correctamente la relación" );
+
+        return redirect()->route('config.instituciones_conf.index');
     }
 }

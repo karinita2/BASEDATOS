@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class InstitucionConfig extends Model
 {
     
-    protected $table = "institucion_grado_seccion";
+    protected $table = "institucion_configs";
 
     protected $fillable = ['institucion_id','grado_id','seccion_id','activo'];
 
@@ -25,5 +25,18 @@ class InstitucionConfig extends Model
     {
         return $this->belongsTo('App\Seccion');
     }
+
+    public function materia_configs()
+    {
+        return $this->hasMany('App\MateriaConfig');
+    }
+    
+    public function getFullNameAttribute() 
+    {
+        return $this->institucion->institucion . " / ". $this->grado->grado ." / ". $this->seccion->seccion;
+    }
+
+
+
 
 }

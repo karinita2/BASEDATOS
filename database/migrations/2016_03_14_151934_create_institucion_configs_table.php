@@ -12,7 +12,7 @@ class CreateInstitucionConfigsTable extends Migration
      */
     public function up()
     {
-        Schema::create('institucion_grado_seccion', function (Blueprint $table) {
+        Schema::create('institucion_configs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('institucion_id')->unsigned();
             $table->integer('grado_id')->unsigned();
@@ -33,6 +33,6 @@ class CreateInstitucionConfigsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('institucion_grado_seccion');
+        Schema::drop('institucion_configs');
     }
 }
