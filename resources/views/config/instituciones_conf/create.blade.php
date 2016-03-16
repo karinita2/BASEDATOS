@@ -23,8 +23,8 @@
 		</div>
 
 		<div class="form-group">
-			{!! Form::label('materia_id','Materia') !!}
-			{!! Form::select('materia_id',$materias, null, ['class' => 'form-control  select-tag', 'required'] ) !!}
+			{!! Form::label('activo','Activo ?') !!}
+			{!! Form::checkbox('activo', 1); !!}
 		</div>
 
 		    
@@ -42,7 +42,7 @@
 
 	<script> 
 		$('.select-tag').chosen({ 
-			placeholder_text_multiple: 'Seleccione las materias asociadas', 
+			placeholder_text_multiple: 'Seleccione...', 
 			no_results_text: 'No se encontraron resultados' 
 		}); 
 	</script> 

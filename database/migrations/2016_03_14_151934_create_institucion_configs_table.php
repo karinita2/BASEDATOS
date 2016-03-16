@@ -12,21 +12,17 @@ class CreateInstitucionConfigsTable extends Migration
      */
     public function up()
     {
-        Schema::create('institucion_configs', function (Blueprint $table) {
+        Schema::create('institucion_grado_seccion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('institucion_id')->unsigned();
             $table->integer('grado_id')->unsigned();
             $table->integer('seccion_id')->unsigned()->nullable();
-            $table->integer('materia_id')->unsigned()->nullable();
-            $table->integer('docente_id')->unsigned()->nullable();
-            $table->boolean('activo');
+            $table->boolean('activo')->default(0);
             $table->timestamps();
 
             $table->foreign('institucion_id')->references('id')->on('instituciones');
             $table->foreign('grado_id')->references('id')->on('grados');
             $table->foreign('seccion_id')->references('id')->on('secciones');
-            $table->foreign('materia_id')->references('id')->on('materias');
-            $table->foreign('docente_id')->references('id')->on('docentes');
         });
     }
 
@@ -37,6 +33,6 @@ class CreateInstitucionConfigsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('institucion_configs');
+        Schema::drop('institucion_grado_seccion');
     }
 }

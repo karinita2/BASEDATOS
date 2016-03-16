@@ -1,10 +1,10 @@
 @extends('template.main')
 
-@section('title','Configurar Institucion')
+@section('title','Configurar Relación')
 
 @section('content')
 
-{!! Form::open(array('route' => 'config.instituciones_conf.store', 'method' => 'POST')) !!}
+{!! Form::open(array('route' => ['config.instituciones_conf.update',$institucion_config->id], 'method' => 'PUT')) !!}
     
 	    <div class="form-group">
 			{!! Form::label('institucion_id','Institucion') !!}
@@ -21,13 +21,12 @@
 			{!! Form::label('seccion_id','Sección') !!}
 			{!! Form::select('seccion_id',$secciones, $institucion_config->seccion_id, ['class' => 'form-control  select-tag', 'required'] ) !!}
 		</div>
-
+		
 		<div class="form-group">
-			{!! Form::label('materia_id','Materia') !!}
-			{!! Form::select('materia_id',$materias, $institucion_config->materia_id, ['class' => 'form-control  select-tag', 'required'] ) !!}
+			{!! Form::label('activo','Activo ?') !!}
+			{!! Form::checkbox('activo', 1, $institucion_config->activo) !!}
 		</div>
-
-		    
+	    
 	    <div class="form-group">
 			{!! Form::submit('Registrar', array('class' => 'btn btn-primary')) !!}
 		</div>
@@ -42,7 +41,7 @@
 
 	<script> 
 		$('.select-tag').chosen({ 
-			placeholder_text_multiple: 'Seleccione las materias asociadas', 
+			placeholder_text_multiple: 'Seleccione...', 
 			no_results_text: 'No se encontraron resultados' 
 		}); 
 	</script> 

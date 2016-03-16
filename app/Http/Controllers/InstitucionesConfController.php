@@ -28,8 +28,6 @@ class InstitucionesConfController extends Controller
             $institucion_configs->institucion;
             $institucion_configs->grado;
             $institucion_configs->seccion;
-            $institucion_configs->materia;
-
         });
 
         return view('config.instituciones_conf.index')
@@ -47,14 +45,11 @@ class InstitucionesConfController extends Controller
         $instituciones = Institucion::orderBy('institucion', 'ASC')->lists('institucion','id');
         $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
         $secciones = Seccion::orderBy('seccion', 'ASC')->lists('seccion','id');
-        $materias = Materia::orderBy('materia', 'ASC')->lists('materia','id');
-
 
         return view('config.instituciones_conf.create')
         ->with('instituciones',$instituciones)
         ->with('grados',$grados)
-        ->with('secciones',$secciones)
-        ->with('materias',$materias);
+        ->with('secciones',$secciones);
     }
 
     /**
@@ -65,7 +60,7 @@ class InstitucionesConfController extends Controller
      */
     public function store(Request $request)
     {
-
+        //dd($request->all());
         $institucion_config = new InstitucionConfig($request->all()); 
         $institucion_config->save(); 
         //$institucion_config->sync($request->materia_id); 
@@ -97,14 +92,12 @@ class InstitucionesConfController extends Controller
         $instituciones = Institucion::orderBy('institucion', 'ASC')->lists('institucion','id');
         $grados = Grado::orderBy('grado', 'ASC')->lists('grado','id');
         $secciones = Seccion::orderBy('seccion', 'ASC')->lists('seccion','id');
-        $materias = Materia::orderBy('materia', 'ASC')->lists('materia','id');
 
 
         return view('config.instituciones_conf.edit')
         ->with('instituciones',$instituciones)
         ->with('grados',$grados)
         ->with('secciones',$secciones)
-        ->with('materias',$materias)
         ->with('institucion_config',$institucion_config);
 
     }
@@ -118,7 +111,12 @@ class InstitucionesConfController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $institucion = Institucion::find($id);
+        $institucion->fill($request->all());
+        $institucion->save();
+       
+        Flash::success("Se ha editado correctamente la relación" );
+        return redirect()->route('config.instituciones_conf.index');   
     }
 
     /**

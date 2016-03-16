@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class InstitucionConfig extends Model
 {
     
-    protected $table = "institucion_configs";
+    protected $table = "institucion_grado_seccion";
 
-    protected $fillable = ['institucion_id','grado_id','seccion_id','materia_id'];
+    protected $fillable = ['institucion_id','grado_id','seccion_id','activo'];
 
     public function institucion() 
     {
@@ -24,16 +24,6 @@ class InstitucionConfig extends Model
     public function seccion() 
     {
         return $this->belongsTo('App\Seccion');
-    }
-
-    public function materia()
-    {
-    	return $this->belongsTo('App\Materia');
-    }
-
-    public function docente()
-    {
-        return $this->belongsTo('App\Docente');
     }
 
 }
