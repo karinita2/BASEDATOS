@@ -208,5 +208,23 @@ Route::group(['middleware' => 'web'], function () {
 			]);
 	});
 
+	
+	Route::group(['prefix' => 'registro'], function () {
+		
+		Route::resource('docentes', 'DocentesController');
+		
+		Route::get('docentes/{id}/destroy', [
+			'uses' => 'DocentesController@destroy',
+			'as'   => 'config.docentes.destroy'
+			]);
+	
+	});
+
+
+
+
+
+
+
 
 });
