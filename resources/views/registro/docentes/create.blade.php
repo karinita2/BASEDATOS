@@ -174,7 +174,7 @@
 		   
 		  	    <div class="form-group">
 					{!! Form::label('edad','Edad') !!}
-					{!! Form::text('edad',null, ['class' => 'form-control', 'placeholder' => 'Edad', 'required', 'readonly' ] ) !!}
+					{!! Form::text('edad',null, ['class' => 'form-control', 'placeholder' => 'Edad', 'required', 'readonly', 'id'=>'edad' ] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -232,26 +232,12 @@
 	<script >
 		$('.datepicker').datepicker({
 			format: 'dd/mm/yyyy',
+		}).on('changeDate', function (ev) {
+			 $.get('/registro/docentes/'+ $("#fe_nac").val().replace(/\//g,"-") +'/getEdad', function(response, state){
 
+				$("#edad").val(response);
+			});
 		});
-
-		$("#fe_nac").blur(function(event){
-			console.log("hola");
-			/*$.get('/config/instituciones/'+event.target.value+'/getMunicipios', function(response, state){
-				
-				$("#municipio_id").empty();
-				$("#paroquia_id").empty();
-				$("#municipio_id").append("<option value='0'>Seleccione un municipio</option>");
-				$(response).each(function(key, value){
-					
-					$("#municipio_id").append("<option value='"+value.id+"'>"+value.municipio+"</option>");
-
-				});
-
-			});*/
-
-		});
-
 	</script>
 
 @endsection	

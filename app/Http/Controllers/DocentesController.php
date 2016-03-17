@@ -129,10 +129,10 @@ class DocentesController extends Controller
     {
    
         if($request->ajax()){
-                dd(Carbon::createFromFormat('d/m/Y', $user->fe_nac)->diff(Carbon::now())->format('%y years %m months %d days'));
+                return Carbon::createFromFormat('d-m-Y', $id)->diff(Carbon::now())->format('%y');
                 
-            //$municipios = Municipio::municipios($id);
-            return response()->json($municipios);
+           //$municipios = Municipio::municipios($id);
+            //return response()->json($municipios);
         }
 
     }
