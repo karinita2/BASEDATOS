@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('nombre1', 50);
             $table->string('nombre2', 50);
             $table->date('fe_nac');
-            $table->enum('edo_civil', ['S','C','D'])->default('S');
+            $table->enum('edo_civil', ['S','C','D','CC'])->default('S');
             $table->enum('sexo', ['M','F'])->default('M');
             $table->string('lugar_nacimiento');
             $table->string('religion');
@@ -33,12 +33,14 @@ class CreateUsersTable extends Migration
             $table->integer('estado_id')->unsigned();
             $table->integer('municipio_id')->unsigned();
             $table->integer('parroquia_id')->unsigned();
+            $table->integer('nivel_estudio_id')->unsigned();
 
 
 
             $table->foreign('estado_id')->references('id')->on('estados');
             $table->foreign('municipio_id')->references('id')->on('municipios');
             $table->foreign('parroquia_id')->references('id')->on('parroquias');
+            $table->foreign('nivel_estudio_id')->references('id')->on('nivel_estudios');
 
 
 
@@ -60,7 +62,7 @@ class CreateUsersTable extends Migration
             
         });
 
-
+        /*
         Schema::create('nivel_estudio_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nivel_estudio_id')->unsigned();
@@ -72,7 +74,7 @@ class CreateUsersTable extends Migration
 
             
         });
-
+        */
 
 
 
@@ -87,7 +89,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::drop('rol_user');
-        Schema::drop('nivel_estudio_user');
+        //Schema::drop('nivel_estudio_user');
         Schema::drop('users');
     }
 }

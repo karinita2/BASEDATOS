@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
         factory('App\Parroquia', 5)->create();
         factory('App\Filial', 5)->create();
         factory('App\Nomina', 5)->create();
-        factory('App\User', 10)->create();
-        factory('App\Trabajador', 1)->create();
-        factory('App\Docente', 1)->create();
+        //factory('App\User', 10)->create();
+        //factory('App\Trabajador', 1)->create();
+        //factory('App\Docente', 1)->create();
         factory('App\Materia', 1)->create();
-        factory('App\Responsable', 1)->create();
+        //factory('App\Responsable', 1)->create();
         
         factory('App\Talla', 4)->create();
         //factory('App\Institucion', 1)->create();

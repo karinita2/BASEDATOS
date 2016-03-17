@@ -36,7 +36,7 @@ class InstitucionesController extends Controller
     {
         $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
         return view('config.instituciones.create')
-        ->with('estados', $estados);;
+        ->with('estados', $estados);
 
     }
 

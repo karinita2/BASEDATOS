@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nacionalidad', 'cedula', 'apellido1','apellido2','nombre1','nombre2','fe_nac','edo_civil','sexo','lugar_nacimiento','religion', 'direccion','telefono_hab','telefono_cel', 'email', 'estado_id', 'municipio_id','parroquia_id'
+        'nacionalidad', 'cedula', 'apellido1','apellido2','nombre1','nombre2','fe_nac','edo_civil','sexo','lugar_nacimiento','religion', 'direccion','telefono_hab','telefono_cel', 'email', 'estado_id', 'municipio_id','parroquia_id','nivel_estudio_id'
     ];
 
     /**
@@ -46,9 +46,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Rol');
     }
 
-    public function nivel_estudios() 
+    public function nivel_estudio() 
     {
-        return $this->belongsToMany('App\NivelEstudio');
+        return $this->belongsTo('App\NivelEstudio');
 
     }
 

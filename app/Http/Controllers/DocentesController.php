@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Estado;
+use App\Filial;
+use App\Nomina;
+use App\NivelEstudio;
 
 class DocentesController extends Controller
 {
@@ -25,7 +29,15 @@ class DocentesController extends Controller
      */
     public function create()
     {
-        return view('registro.docentes.create');
+        $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
+        $filiales = Filial::orderBy('filial', 'ASC')->lists('filial','id');
+        $nominas = Nomina::orderBy('nomina', 'ASC')->lists('nomina','id');
+        $nivel_estudios = NivelEstudio::orderBy('nivel', 'ASC')->lists('nivel','id');
+        return view('registro.docentes.create')
+        ->with('estados', $estados)
+        ->with('filiales', $filiales)
+        ->with('nominas', $nominas)
+        ->with('nivel_estudios', $nivel_estudios);
     }
 
     /**
