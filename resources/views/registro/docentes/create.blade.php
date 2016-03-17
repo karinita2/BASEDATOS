@@ -4,29 +4,28 @@
 
 @section('content')
 
-{!! Form::open(array('route' => 'config.grados.store', 'method' => 'POST')) !!}
+{!! Form::open(array('route' => 'registro.docentes.store', 'method' => 'POST')) !!}
     
     <img src="{{ asset('images/sin-foto.gif') }}" width="140" height="300" class="img-thumbnail">
 
 	    <div class="row">
 		  <div class="col-xs-3">
-		   
-		  	    <div class="form-group">
-					{!! Form::label('grado','Nacionalidad') !!}
-					{!! Form::select('size', array('V' => 'Venezolano', 'E' => 'Extrangero'), 'V',  ['class' => 'form-control  select-tag', 'required']) !!}
+		   	    <div class="form-group">
+					{!! Form::label('nacionalidad','Nacionalidad') !!}
+					{!! Form::select('nacionalidad', array('V' => 'Venezolano', 'E' => 'Extrangero'), 'V',  ['class' => 'form-control  select-tag', 'required']) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('grado','Estado Civil') !!}
-					{!! Form::select('size', array('S' => 'Soltero', 'C' => 'Casado', 'D' => 'Divorciado', 'CC' => 'Concubino'), 'S',  ['class' => 'form-control  select-tag', 'required']) !!}				</div>
+					{!! Form::label('sexo','Estado Civil') !!}
+					{!! Form::select('sexo', array('M' => 'Masculino', 'F' => 'Femenino'), 'S',  ['class' => 'form-control  select-tag', 'required']) !!}	
+				  </div>
 
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-					{!! Form::label('email','Correo Electrónico') !!}
-
-					{!! Form::email('email',null, ['class' => 'form-control', 'placeholder' => 'Correo Electrónico', 'required'] ) !!}
+					{!! Form::label('telefono_trabajo','Teléfono Trabajo') !!}
+					{!! Form::text('telefono_trabajo',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Trabajo', 'required'] ) !!}
 				</div>
 		  </div>
 		</div>
@@ -41,14 +40,15 @@
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('grado','Dirección de Habitación') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Dirección', 'required'] ) !!}
+				{!! Form::label('edo_civil','Estado Civil') !!}
+					{!! Form::select('edo_civil', array('S' => 'Soltero', 'C' => 'Casado', 'D' => 'Divorciado', 'CC' => 'Concubino'), 'S',  ['class' => 'form-control  select-tag', 'required']) !!}	
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-					{!! Form::label('grado','Profesión u Oficio') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Profesión u Oficio', 'required'] ) !!}
+					{!! Form::label('email','Correo Electrónico') !!}
+
+					{!! Form::email('email',null, ['class' => 'form-control', 'placeholder' => 'Correo Electrónico', 'required'] ) !!}
 				</div>
 		  </div>
 		</div>
@@ -57,20 +57,20 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Primer Apellido') !!}
-					{!! Form::text('cedula',null, ['class' => 'form-control', 'placeholder' => 'Primer Apellido', 'required'] ) !!}
+					{!! Form::label('apellido1','Primer Apellido') !!}
+					{!! Form::text('apellido1',null, ['class' => 'form-control', 'placeholder' => 'Primer Apellido', 'required'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('estado_id','Estado') !!}
-					{!! Form::select('estado_id',$estados, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'estado_id'] ) !!}
+					{!! Form::label('direccion','Dirección de Habitación') !!}
+					{!! Form::text('direccion',null, ['class' => 'form-control', 'placeholder' => 'Dirección', 'required'] ) !!}
 					</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-					{!! Form::label('grado','Nivel de Estudios') !!}
-					{!! Form::select('nivel_estudio_id',$nivel_estudios, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'nivel_estudio_id'] ) !!}
+					{!! Form::label('profesion','Profesión u Oficio') !!}
+					{!! Form::text('profesion',null, ['class' => 'form-control', 'placeholder' => 'Profesión u Oficio', 'required'] ) !!}
 				
 
 				</div>
@@ -81,8 +81,31 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Segundo Apellido') !!}
-					{!! Form::text('cedula',null, ['class' => 'form-control', 'placeholder' => 'Segundo Apellido', 'required'] ) !!}
+					{!! Form::label('apellido2','Segundo Apellido') !!}
+					{!! Form::text('apellido2',null, ['class' => 'form-control', 'placeholder' => 'Segundo Apellido', 'required'] ) !!}
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		  <div class="form-group">
+					{!! Form::label('estado_id','Estado') !!}
+					{!! Form::select('estado_id',$estados, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'estado_id'] ) !!}
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		 <div class="form-group">
+					{!! Form::label('nivel_estudio_id','Nivel de Estudios') !!}
+					{!! Form::select('nivel_estudio_id',$nivel_estudios, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'nivel_estudio_id'] ) !!}
+				</div>
+		  </div>
+		</div>
+
+
+		<div class="row">
+		  <div class="col-xs-3">
+		   
+		  	    <div class="form-group">
+					{!! Form::label('nombre1','Primer Nombre') !!}
+					{!! Form::text('nombre1',null, ['class' => 'form-control', 'placeholder' => 'Primer Nombre', 'required'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -93,8 +116,8 @@
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-					{!! Form::label('grado','Lugar de Trabajo') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Lugar de Trabajo', 'required'] ) !!}
+					{!! Form::label('lugar_trabajo','Lugar de Trabajo') !!}
+					{!! Form::text('lugar_trabajo',null, ['class' => 'form-control', 'placeholder' => 'Lugar de Trabajo', 'required'] ) !!}
 				</div>
 		  </div>
 		</div>
@@ -104,8 +127,8 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Primer Nombre') !!}
-					{!! Form::text('cedula',null, ['class' => 'form-control', 'placeholder' => 'Primer Nombre', 'required'] ) !!}
+					{!! Form::label('nombre2','Segundo Nombre') !!}
+					{!! Form::text('nombre2',null, ['class' => 'form-control', 'placeholder' => 'Segundo Nombre', 'required'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -127,44 +150,21 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Segundo Nombre') !!}
-					{!! Form::text('cedula',null, ['class' => 'form-control', 'placeholder' => 'Segundo Nombre', 'required'] ) !!}
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		  <div class="form-group">
-					{!! Form::label('grado','Teléfono Habitación') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Habitación', 'required'] ) !!}
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		 <div class="form-group">
-					{!! Form::label('grado','Nómina') !!}
-					{!! Form::select('nomina_id',$nominas, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'nomina_id'] ) !!}
-				</div>
-		  </div>
-		</div>
-
-
-		<div class="row">
-		  <div class="col-xs-3">
-		   
-		  	    <div class="form-group">
-					{!! Form::label('cedula','Fecha Nacimiento') !!}
+					{!! Form::label('fe_nac','Fecha Nacimiento') !!}
 					
-					{!! Form::text('cedula',null, ['class' => 'form-control datepicker', 'placeholder' => 'Fecha Nacimiento', 'required'] ) !!}
+					{!! Form::text('fe_nac',null, ['class' => 'form-control datepicker', 'placeholder' => 'Fecha Nacimiento', 'required', 'id'=>'fe_nac'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('grado','Teléfono Celular') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Celular', 'required'] ) !!}
+					{!! Form::label('telefono_hab','Teléfono Habitación') !!}
+					{!! Form::text('telefono_hab',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Habitación', 'required'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-					{!! Form::label('grado','Departamento') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Departamento', 'required'] ) !!}
+					{!! Form::label('nomina_id','Nómina') !!}
+					{!! Form::select('nomina_id',$nominas, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'nomina_id'] ) !!}
 				</div>
 		  </div>
 		</div>
@@ -173,22 +173,45 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Edad') !!}
-					{!! Form::text('cedula',null, ['class' => 'form-control', 'placeholder' => 'Edad', 'required'] ) !!}
+					{!! Form::label('edad','Edad') !!}
+					{!! Form::text('edad',null, ['class' => 'form-control', 'placeholder' => 'Edad', 'required', 'readonly' ] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('grado','Teléfono Trabajo') !!}
-					{!! Form::text('grado',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Trabajo', 'required'] ) !!}
+					{!! Form::label('telefono_cel','Teléfono Celular') !!}
+					{!! Form::text('telefono_cel',null, ['class' => 'form-control', 'placeholder' => 'Teléfono Celular', 'required'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
-	
+					{!! Form::label('departamento','Departamento') !!}
+					{!! Form::text('departamento',null, ['class' => 'form-control', 'placeholder' => 'Departamento', 'required'] ) !!}
 				</div>
 		  </div>
 		</div>
+
+
+	    <div class="row">
+		  <div class="col-xs-3">
+		   
+		  	    <div class="form-group">
+					{!! Form::label('lugar_nacimiento','Lugar de Nacimiento') !!}
+					{!! Form::text('lugar_nacimiento',null, ['class' => 'form-control', 'placeholder' => 'Lugar de Nacimiento', 'required'] ) !!}
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		  <div class="form-group">
+
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		 <div class="form-group">
+
+				</div>
+		  </div>
+		</div>
+
 
 	    <div class="form-group">
 			{!! Form::submit('Registrar', array('class' => 'btn btn-primary')) !!}
@@ -211,6 +234,24 @@
 			format: 'dd/mm/yyyy',
 
 		});
+
+		$("#fe_nac").blur(function(event){
+			console.log("hola");
+			/*$.get('/config/instituciones/'+event.target.value+'/getMunicipios', function(response, state){
+				
+				$("#municipio_id").empty();
+				$("#paroquia_id").empty();
+				$("#municipio_id").append("<option value='0'>Seleccione un municipio</option>");
+				$(response).each(function(key, value){
+					
+					$("#municipio_id").append("<option value='"+value.id+"'>"+value.municipio+"</option>");
+
+				});
+
+			});*/
+
+		});
+
 	</script>
 
 @endsection	

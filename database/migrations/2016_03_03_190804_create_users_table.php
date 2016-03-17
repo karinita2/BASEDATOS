@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->enum('edo_civil', ['S','C','D','CC'])->default('S');
             $table->enum('sexo', ['M','F'])->default('M');
             $table->string('lugar_nacimiento');
-            $table->string('religion');
+            //$table->string('religion');
             $table->string('direccion');
             $table->string('telefono_hab');
             $table->string('telefono_cel');

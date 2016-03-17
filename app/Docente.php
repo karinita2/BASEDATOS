@@ -9,7 +9,7 @@ class Docente extends Model
     //
     protected $table = "docentes";
 
-    //protected $fillable = ['cmedica'];
+    protected $fillable = ['id'];
     /*
     public function materias() 
     {

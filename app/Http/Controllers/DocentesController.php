@@ -9,6 +9,11 @@ use App\Estado;
 use App\Filial;
 use App\Nomina;
 use App\NivelEstudio;
+use App\User;
+use App\Trabajador;
+use App\Docente;
+use Laracasts\Flash\Flash;
+use Carbon\Carbon;
 
 class DocentesController extends Controller
 {
@@ -19,7 +24,14 @@ class DocentesController extends Controller
      */
     public function index()
     {
-        //
+        //dd("aqui");
+        $docentes = Docente::orderBy('id', 'ASC')->paginate(5);
+        $docentes->each(function($docentes){
+            $docentes->trabajador;
+           
+        });
+        //dd($docentes);
+        return view('registro.docentes.index')->with('docentes', $docentes);
     }
 
     /**
@@ -48,7 +60,24 @@ class DocentesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Primero guardo los valores asociados a un usuario
+        $user = new User($request->all());
+        $fe_nac_format = Carbon::createFromFormat('d/m/Y', $user->fe_nac)->format('Y-m-d');
+        $user->fe_nac= $fe_nac_format;
+        $user->save();
+
+        //luego guardo los valores asociados al trabajador
+        $trabajador = new Trabajador($request->all());
+        $trabajador->id=$user->id;
+        $trabajador->save();
+
+        //luego guardo los datos de docente
+        $docente = new Docente($request->all());
+        $docente->id=$user->id;
+        $docente->save();
+
+        Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
+        return redirect()->route('registro.docentes.index');
     }
 
     /**
@@ -95,4 +124,19 @@ class DocentesController extends Controller
     {
         //
     }
+
+    public function getEdad(Request $request, $id)
+    {
+   
+        if($request->ajax()){
+                dd(Carbon::createFromFormat('d/m/Y', $user->fe_nac)->diff(Carbon::now())->format('%y years %m months %d days'));
+                
+            //$municipios = Municipio::municipios($id);
+            return response()->json($municipios);
+        }
+
+    }
+
+
+
 }

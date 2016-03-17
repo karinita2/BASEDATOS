@@ -215,9 +215,15 @@ Route::group(['middleware' => 'web'], function () {
 		
 		Route::get('docentes/{id}/destroy', [
 			'uses' => 'DocentesController@destroy',
-			'as'   => 'config.docentes.destroy'
+			'as'   => 'registro.docentes.destroy'
 			]);
 	
+		Route::get('/docentes/{id}/getEdad', [
+			'uses' => 'DocentesController@getParroquias',
+			'as'   => 'registro.docentes.getParroquias'
+			]);
+
+
 	});
 
 

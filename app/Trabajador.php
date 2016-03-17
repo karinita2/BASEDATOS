@@ -9,7 +9,7 @@ class Trabajador extends Model
     //
     protected $table = "trabajadores";
 
-    protected $fillable = ['profesion', 'lugar_trabajo', 'departamento', 'telefono_trabajo'];
+    protected $fillable = ['profesion', 'lugar_trabajo', 'departamento', 'telefono_trabajo', 'nomina_id', 'filial_id'];
 
 
     public function filial()
@@ -26,7 +26,7 @@ class Trabajador extends Model
     
     public function user() 
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','id','id');
 
     }
     

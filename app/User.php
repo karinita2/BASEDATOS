@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function trabajador() 
     {
-        return $this->hasOne('App\Trabajador');
+        return $this->hasOne('App\Trabajador','id','id');
 
     }
 
