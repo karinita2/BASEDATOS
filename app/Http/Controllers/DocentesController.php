@@ -137,6 +137,19 @@ class DocentesController extends Controller
 
     }
 
+    public function getVerificaCedula(Request $request, $id)
+    {
+        
+        if($request->ajax()){
+                $docente = User::where('id',1)->get();
+                 return $docente;
+              
+           //$municipios = Municipio::municipios($id);
+            //return response()->json($municipios);
+        }
+
+    }
+
 
 
 }

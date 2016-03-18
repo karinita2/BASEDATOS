@@ -223,6 +223,11 @@ Route::group(['middleware' => 'web'], function () {
 			'as'   => 'registro.docentes.getEdad'
 			]);
 
+		Route::get('/docentes/{id}/getVerificaCedula', [
+			'uses' => 'DocentesController@getVerificaCedula',
+			'as'   => 'registro.docentes.getVerificaCedula'
+			]);
+
 
 	});
 

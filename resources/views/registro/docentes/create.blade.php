@@ -35,7 +35,7 @@
 		   
 		  	    <div class="form-group">
 					{!! Form::label('cedula','Cédula') !!}
-					{!! Form::number('cedula',null, ['class' => 'form-control', 'placeholder' => 'Cédula', 'required'] ) !!}
+					{!! Form::number('cedula',null, ['class' => 'form-control', 'placeholder' => 'Cédula', 'required', 'id'=>'cedula'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -238,6 +238,25 @@
 				$("#edad").val(response);
 			});
 		});
+
+	$("#cedula").blur(function(event){
+		console.log(event.target.value);
+		$.get('/registro/docentes/'+event.target.value+'/getVerificaCedula', function(response, state){
+			var json_obj = $.parseJSON(response);//parse JSON
+			//obj =  $.parseJSON(response);
+			console.log(obj);
+			
+		});
+
+	});
+
+
+
+
+
+
+
+
 	</script>
 
 @endsection	
