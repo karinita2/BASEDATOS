@@ -137,19 +137,53 @@ class DocentesController extends Controller
 
     }
 
-    public function getVerificaCedula(Request $request, $id)
+    public function getVerificaCedulaDocente(Request $request, $id)
     {
         
         if($request->ajax()){
-                $docente = User::where('id',1)->get();
-                 return $docente;
-              
+                $user = User::where('cedula',$id)->first();
+                $count = Docente::where('id',$user->id)->count();
+                    if($count==1){
+                        $docente = Docente::find($user->id);
+                           return response()->json($docente);
+                    }
+                    else 
+                        return NULL;
+          
            //$municipios = Municipio::municipios($id);
             //return response()->json($municipios);
         }
-
     }
 
+    public function getTrabajadorJSON(Request $request, $id)
+    {
+        
+        if($request->ajax()){
+                $trabajador = Trabajador::find($id);
+                    return response()->json($trabajador);
+                    
+          
+           //$municipios = Municipio::municipios($id);
+            //return response()->json($municipios);
+        }
+    }
+    
+    public function getUsuarioJSON(Request $request, $id)
+    {
+        
+        if($request->ajax()){
+                $user = User::find($id);
+                $fe_nac_format = Carbon::createFromFormat('Y-m-d', $user->fe_nac)->format('d/m/Y');
+                $user->fe_nac= $fe_nac_format;
 
+
+
+                    return response()->json($user);
+                    
+          
+           //$municipios = Municipio::municipios($id);
+            //return response()->json($municipios);
+        }
+    }
 
 }

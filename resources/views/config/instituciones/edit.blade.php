@@ -58,5 +58,12 @@
 @section('js') 
 
 	<script src="{{ asset('js/dropdownstate.js') }}"></script>
+	<script src="{{ asset('js/dropdowneditstate.js') }}"></script>
+	<script >
+		$(document).on('ready',function(e){
 
+			cargarCombosEdit();	
+		});
+
+	</script>
 @endsection	

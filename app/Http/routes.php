@@ -223,11 +223,20 @@ Route::group(['middleware' => 'web'], function () {
 			'as'   => 'registro.docentes.getEdad'
 			]);
 
-		Route::get('/docentes/{id}/getVerificaCedula', [
-			'uses' => 'DocentesController@getVerificaCedula',
-			'as'   => 'registro.docentes.getVerificaCedula'
+		Route::get('/docentes/{id}/getVerificaCedulaDocente', [
+			'uses' => 'DocentesController@getVerificaCedulaDocente',
+			'as'   => 'registro.docentes.getVerificaCedulaDocente'
+			]);
+		
+		Route::get('/docentes/{id}/getTrabajadorJSON', [
+			'uses' => 'DocentesController@getTrabajadorJSON',
+			'as'   => 'registro.docentes.getTrabajadorJSON'
 			]);
 
+		Route::get('/docentes/{id}/getUsuarioJSON', [
+			'uses' => 'DocentesController@getUsuarioJSON',
+			'as'   => 'registro.docentes.getUsuarioJSON'
+			]);
 
 	});
 

@@ -89,6 +89,7 @@
 		   		  <div class="form-group">
 					{!! Form::label('estado_id','Estado') !!}
 					{!! Form::select('estado_id',$estados, null, ['class' => 'form-control  select-tag', 'required', 'id'=>'estado_id'] ) !!}
+					{!! Form::hidden('estado', null, ['id'=>'estado']) !!} 
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -112,6 +113,10 @@
 		   		  <div class="form-group">
 					{!! Form::label('municipio_id','Municipio') !!}
 					{!! Form::select('municipio_id',['placeholder'=>'Selecciona'], null, ['class' => 'form-control  select-tag', 'required', 'id'=>'municipio_id'] ) !!}
+					{!! Form::hidden('municipio', null, ['id'=>'municipio']) !!} 
+
+
+
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -135,6 +140,7 @@
 		   		  <div class="form-group">
 					{!! Form::label('parroquia_id','Parroquia') !!}
 					{!! Form::select('parroquia_id',['placeholder'=>'Selecciona'], null, ['class' => 'form-control  select-tag', 'required', 'id'=>'parroquia_id'] ) !!}
+					{!! Form::hidden('parroquia', null, ['id'=>'parroquia']) !!} 
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -229,6 +235,7 @@
 @section('js') 
 
 	<script src="{{ asset('js/dropdownstate.js') }}"></script>
+	<script src="{{ asset('js/dropdowneditstate.js') }}"></script>
 	<script >
 		$('.datepicker').datepicker({
 			format: 'dd/mm/yyyy',
@@ -240,22 +247,35 @@
 		});
 
 	$("#cedula").blur(function(event){
-		console.log(event.target.value);
-		$.get('/registro/docentes/'+event.target.value+'/getVerificaCedula', function(response, state){
-			var json_obj = $.parseJSON(response);//parse JSON
-			//obj =  $.parseJSON(response);
-			console.log(obj);
-			
+		//console.log(event.target.value);
+		$.get('/registro/docentes/'+event.target.value+'/getVerificaCedulaDocente', function(response, state){
+
+			   for (var attr in response) {
+		         
+			   		$("#"+attr).val(response[attr]);
+   				}
+    			
+    			$.get('/registro/docentes/'+response.id+'/getTrabajadorJSON', function(response, state){
+
+				   for (var attr in response) {
+			         	
+				   		$("#"+attr).val(response[attr]);
+	    			}	
+
+					$.get('/registro/docentes/'+response.id+'/getUsuarioJSON', function(response, state){
+						$("#estado").val(response.estado_id);
+		    			$("#municipio").val(response.municipio_id);
+						$("#parroquia").val(response.parroquia_id);
+						//console.log(response.parroquia_id);
+					   for (var attr in response) {
+				   	   		$("#"+attr).val('');
+					   		$("#"+attr).val(response[attr]);
+		    			}
+		    			cargarCombosEdit();
+					});   
+				}); 
 		});
-
 	});
-
-
-
-
-
-
-
 
 	</script>
 

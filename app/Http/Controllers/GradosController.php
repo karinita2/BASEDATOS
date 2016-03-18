@@ -67,6 +67,8 @@ class GradosController extends Controller
     public function edit($id)
     {
          $grado = Grado::find($id);
+        //$grado = Grado::where('id',6)->get();
+         //dd($grado);
          return view('config.grados.edit')->with('grado',$grado);
     }
 
