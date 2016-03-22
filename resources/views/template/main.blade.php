@@ -14,7 +14,7 @@
 	  <div class="panel-heading">
 	    <h3 class="panel-title">@yield('title','Default')</h3>
 	  </div>
-	  <div class="panel-body">
+	  <div class="panel-body" >
 	   		@include('flash::message')
 	   		@include('template.partials.errors')
 			@yield('content')

@@ -128,7 +128,11 @@ class DocentesController extends Controller
 
 
                     }
+                    //Si el usuario no existe en la tabla trabajadores, pero si existe en 
+                    //la tabla de usuario entonces procedemos a actualizar los datos  de la tabla
+                    //de usuario, a registrarlo como trabajador y luego como docente
                     else {
+
 
                     }
               }
@@ -167,34 +171,30 @@ class DocentesController extends Controller
      */
     public function update(Request $request, $id)
     {
-            dd('actualizar docente');
-            /*
-            $user = User::find($user->id);
+            //dd('actualizar docente');
+            
+            $user = User::find($id);
             $fe_nac_format = Carbon::createFromFormat('d/m/Y', $request->fe_nac)->format('Y-m-d');
             $user->fill($request->all());
             $user->fe_nac= $fe_nac_format;
             $user->save(); 
 
 
-            $user = new User($request->all());
-            $fe_nac_format = Carbon::createFromFormat('d/m/Y', $user->fe_nac)->format('Y-m-d');
-            $user->fe_nac= $fe_nac_format;
-            $user->save();
-
-            //luego guardo los valores asociados al trabajador
-            $trabajador = new Trabajador($request->all());
-            $trabajador->id=$user->id;
+            //luego actualizo los valores asociados al trabajador
+            $trabajador = Trabajador::find($user->id);
+            $trabajador->fill($request->all());
             $trabajador->save();
 
-            //luego guardo los datos de docente
-            $docente = new Docente($request->all());
-            $docente->id=$user->id;
+
+            //guardo los datos de docente
+            $docente = Docente::find($user->id);
+            $docente->fill($request->all());
             $docente->save();
 
-            Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
+            Flash::success("Se ha actualizado el docente: ".$user->nombre1. " ".$user->apellido1 );
             return redirect()->route('registro.docentes.index');
 
-*/
+
 
     }
 

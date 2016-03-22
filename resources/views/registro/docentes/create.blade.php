@@ -3,21 +3,49 @@
 @section('title','Registrar Docente')
 
 @section('content')
-
-{!! Form::open(array('route' => 'registro.docentes.store', 'method' => 'POST', 'id' => 'docenteForm')) !!}
+ <div class="col-md-12 col-md-offset-1">
+{!! Form::open(array('route' => 'registro.docentes.store', 'method' => 'POST', 'id' => 'docenteForm',  'files' => 'true')) !!}
     
-    <img src="{{ asset('images/sin-foto.gif') }}" width="140" height="300" class="img-thumbnail">
+   
+   
+	    <div class="row">
+		  <div class="col-xs-3">
+		   	    <div class="form-group">
+					</div>
+		  			</div>
+		  <div class="col-xs-3">
+		   		  <div class="form-group">
+					</div>
+
+		  			</div>
+		  <div class="col-xs-3">
+		   		 <div class="form-group">
+		   		 	 <div class="panel panel-default pull-right" style="width:195px; height:220px;">
+						  <div class="panel-body">
+						     	{!! Html::image(asset('images/sin-foto.gif'),'Subir Foto',array('class' => 'img-rounded',
+						     	'id'=>'idImg', 'width' => '160px', 'height' => '140px')) !!}
+						     	<!--<img src="{{ asset('images/sin-foto.gif') }}" style="width:160px; height:140px;" > 'style'=>'display:none'-->
+						  </div>
+						  <div class="panel-footer">
+						  		{!! Form::label('foto','Foto') !!}
+						 		{!! Form::file('fotoCarnet', array('style'=>'display:none','id'=>'fotoCarnet', 'accept' => 'image/x-png, image/jpeg')) !!} 		
+
+						  </div>
+						</div>
+				</div>
+		  </div>
+		</div>
 
 	    <div class="row">
 		  <div class="col-xs-3">
 		   	    <div class="form-group">
-					{!! Form::label('nacionalidad','Nacionalidad') !!}
-					{!! Form::select('nacionalidad', array('V' => 'Venezolano', 'E' => 'Extranjero'), 'V',  ['class' => 'form-control  select-tag', 'required','placeholder'=>'Selecciona la nacionalidad','tabindex'=>'1' ]) !!}
+					{!! Form::label('cedula','Cédula') !!}
+					{!! Form::number('cedula',null, ['class' => 'form-control', 'placeholder' => 'Cédula', 'required', 'id'=>'cedula','tabindex'=>'1'] ) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					{!! Form::label('sexo','Estado Civil') !!}
+					{!! Form::label('sexo','Género') !!}
 					{!! Form::select('sexo', array('M' => 'Masculino', 'F' => 'Femenino'), 'S',  ['class' => 'form-control  select-tag', 'required','placeholder'=>'Selecciona un genero','tabindex'=>'9']) !!}	
 				  </div>
 
@@ -34,8 +62,8 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					{!! Form::label('cedula','Cédula') !!}
-					{!! Form::number('cedula',null, ['class' => 'form-control', 'placeholder' => 'Cédula', 'required', 'id'=>'cedula','tabindex'=>'2'] ) !!}
+		  	    	{!! Form::label('nacionalidad','Nacionalidad') !!}
+					{!! Form::select('nacionalidad', array('V' => 'Venezolano', 'E' => 'Extranjero'), 'V',  ['class' => 'form-control  select-tag', 'required','placeholder'=>'Selecciona la nacionalidad','tabindex'=>'2' ]) !!}
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -218,10 +246,24 @@
 		  </div>
 		</div>
 
+	    <div class="row">
+		  <div class="col-xs-3">
+		   
+		  	    <div class="form-group">
+					</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		  <div class="form-group">
 
-	    <div class="form-group">
-			{!! Form::submit('Registrar', array('class' => 'btn btn-primary')) !!}
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		 <div class="form-group">
+						{!! Form::submit('Guardar', array('class' => 'btn btn-primary pull-right')) !!}
+				</div>
+		  </div>
 		</div>
+
 <br>
 <br>
 <br>
@@ -229,6 +271,7 @@
 <br>
 <br>
 {!! Form::close() !!}	
+ </div>
 
 @endsection
 
@@ -322,6 +365,24 @@ function clear_form_elements(ele) {
     		}//fin del else*/
 		});
 	});
+
+	function readURL(input, img) {
+	 if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+	  reader.onload = function (e) {
+	   $(img).attr('src', e.target.result);
+	  }
+	  reader.readAsDataURL(input.files[0]);
+	 }
+	}
+
+	function browseURL(path,path2){
+		$(path).change(function(){
+		 readURL(this,path2);
+		});
+	}
+	//browseURL('id_input_file','id_imagen')
+	browseURL('#fotoCarnet','#idImg');
 
 	</script>
 
