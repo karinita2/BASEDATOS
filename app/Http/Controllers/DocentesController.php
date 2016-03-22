@@ -12,6 +12,7 @@ use App\NivelEstudio;
 use App\User;
 use App\Trabajador;
 use App\Docente;
+use App\Imagen;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 
@@ -60,10 +61,9 @@ class DocentesController extends Controller
      */
     public function store(Request $request)
     {
-        //Primero guardo los valores asociados a un usuario
-        //dd($request->cedula);
-        $count = User::where('cedula',$request->cedula)->count();
 
+        $count = User::where('cedula',$request->cedula)->count();
+        //Primero guardo los valores asociados a un usuario
         //Si no existe en la tabla de usuarios, entonces se procede a la carga completa
         //en la tabla de usuarios-trabajadores-docentes
         if($count==0){
@@ -82,6 +82,16 @@ class DocentesController extends Controller
             $docente = new Docente($request->all());
             $docente->id=$user->id;
             $docente->save();
+
+            //verificamos si se ha enviado una imagen 
+            if($request->file('ruta')){
+                //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+                $image= new Imagen();
+                $image->setNombreAttribute($request->file('ruta'));
+                $image->user()->associate($user);
+                //dd($image);
+                $image->save();
+            }
 
             Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
             return redirect()->route('registro.docentes.index');
@@ -132,7 +142,25 @@ class DocentesController extends Controller
                     //la tabla de usuario entonces procedemos a actualizar los datos  de la tabla
                     //de usuario, a registrarlo como trabajador y luego como docente
                     else {
+                      //actualizar usuario
+                      $user = User::find($user->id);
+                      $fe_nac_format = Carbon::createFromFormat('d/m/Y', $request->fe_nac)->format('Y-m-d');
+                      $user->fill($request->all());
+                      $user->fe_nac= $fe_nac_format;
+                      $user->save(); 
 
+                      //registrar trabajador
+                      $trabajador = new Trabajador($request->all());
+                      $trabajador->id=$user->id;
+                      $trabajador->save();
+                      
+                      //registrar docente
+                      $docente = new Docente($request->all());
+                      $docente->id=$user->id;
+                      $docente->save();
+
+                      Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
+                      return redirect()->route('registro.docentes.index');
 
                     }
               }
@@ -225,18 +253,24 @@ class DocentesController extends Controller
     {
         
         if($request->ajax()){
-                
-                $user = User::where('cedula',$id)->first();
-                $count = Docente::where('id',$user->id)->count();
-                //$count = User::where('cedula',$id)->count();
-                //$count = Docente::where('id',$user->id)->count();
-                    if($count==1){
-                        //$user = User::where('cedula',$id)->first();
-                        $docente = Docente::find($user->id);
-                           return response()->json($docente);
-                    }
-                    else 
-                        return '0';
+                $count = User::where('cedula',$id)->count();
+                if($count==1){
+                  $user = User::where('cedula',$id)->first();
+                  $count = Docente::where('id',$user->id)->count();
+                  //$count = User::where('cedula',$id)->count();
+                  //$count = Docente::where('id',$user->id)->count();
+                      if($count==1){
+                          //$user = User::where('cedula',$id)->first();
+                          $docente = Docente::find($user->id);
+                             return response()->json($docente);
+                      }
+                      else {
+                          return '0';
+                      }
+                }
+                else {
+                          return '0';
+                }
           
            //$municipios = Municipio::municipios($id);
             //return response()->json($municipios);
@@ -248,7 +282,8 @@ class DocentesController extends Controller
         //echo $id;
         if($request->ajax()){
                 
-                
+                $count = User::where('cedula',$id)->count();
+                if($count==1){
                 $user = User::where('cedula',$id)->first();
 
                 $count = Trabajador::where('id',$user->id)->count();
@@ -260,31 +295,37 @@ class DocentesController extends Controller
                         $trabajador = Trabajador::find($user->id);
                         return response()->json($trabajador);
                     }
-                    else 
+                    else {
                         return '0';
+                    }
+                }
+                else {
+                        return '0';
+                }
+
+
         }
     }
     
     public function getUsuarioJSON(Request $request, $id)
     {
         
-        if($request->ajax()){
-                $user = User::where('cedula',$id)->first();
+          if($request->ajax()){
 
-                //$user = User::find($id);
-                $fe_nac_format = Carbon::createFromFormat('Y-m-d', $user->fe_nac)->format('d/m/Y');
-                $edad= Carbon::createFromFormat('Y-m-d', $user->fe_nac)->diff(Carbon::now())->format('%y');
-                $user->fe_nac= $fe_nac_format;
-                $user->edad= $edad;
-
-              
-
-                    return response()->json($user);
-                    
-          
-           //$municipios = Municipio::municipios($id);
-            //return response()->json($municipios);
-        }
+                  $user = User::where('cedula',$id)->first();
+                  $count = User::where('cedula',$id)->count();
+                  if($count==1){
+                      //$user = User::find($id);
+                      $fe_nac_format = Carbon::createFromFormat('Y-m-d', $user->fe_nac)->format('d/m/Y');
+                      $edad= Carbon::createFromFormat('Y-m-d', $user->fe_nac)->diff(Carbon::now())->format('%y');
+                      $user->fe_nac= $fe_nac_format;
+                      $user->edad= $edad;
+                      return response()->json($user);
+                  }
+                  else {
+                        return '0';
+                  }
+         }
     }
 
 }

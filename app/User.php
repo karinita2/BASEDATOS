@@ -63,7 +63,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Alumno','id','id');
 
     }
+    
+    public function imagens() 
+    {
+       return $this->hasMany('App\Imagen');
 
-
+    }
 
 }

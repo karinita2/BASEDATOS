@@ -22,14 +22,17 @@
 		   		 <div class="form-group">
 		   		 	 <div class="panel panel-default pull-right" style="width:195px; height:220px;">
 						  <div class="panel-body">
-						     	{!! Html::image(asset('images/sin-foto.gif'),'Subir Foto',array('class' => 'img-rounded',
-						     	'id'=>'idImg', 'width' => '160px', 'height' => '140px')) !!}
+						     	{!! Html::image(asset('images/sin-foto.gif'),'Subir Foto',array('class' => 'img-rounded idImg',
+						     	'id'=>'idImg', 'width' => '160px', 'height' => '140px','onclick'=>"$('#ruta').click();")) !!}
 						     	<!--<img src="{{ asset('images/sin-foto.gif') }}" style="width:160px; height:140px;" > 'style'=>'display:none'-->
 						  </div>
 						  <div class="panel-footer">
-						  		{!! Form::label('foto','Foto') !!}
-						 		{!! Form::file('fotoCarnet', array('style'=>'display:none','id'=>'fotoCarnet', 'accept' => 'image/x-png, image/jpeg')) !!} 		
+						  		<div  style="text-align:center">
+						  			{!! Form::label('foto','Foto') !!}
+						 			{!! Form::file('ruta', array('style'=>'display:none','id'=>'ruta', 'accept' => 'image/x-png, image/jpeg')) !!} 		
 
+						  		</div>
+						  	
 						  </div>
 						</div>
 				</div>
@@ -274,6 +277,15 @@
  </div>
 
 @endsection
+@section('css')
+<style type="text/css">
+	.idImg:hover{
+	
+	cursor:pointer;
+	
+}
+</style> 
+@endsection
 
 @section('js') 
 
@@ -336,15 +348,17 @@ function clear_form_elements(ele) {
 		   			}
 
 					$.get('/registro/docentes/'+event.target.value+'/getUsuarioJSON', function(response, state){
-						$("#estado").val(response.estado_id);
-		    			$("#municipio").val(response.municipio_id);
-						$("#parroquia").val(response.parroquia_id);
-						//console.log(response.parroquia_id);
-					   for (var attr in response) {
-				   	   		$("#"+attr).val('');
-					   		$("#"+attr).val(response[attr]);
-		    			}
-		    			cargarCombosEdit();
+						if(response!=0){
+							$("#estado").val(response.estado_id);
+			    			$("#municipio").val(response.municipio_id);
+							$("#parroquia").val(response.parroquia_id);
+							//console.log(response.parroquia_id);
+						   for (var attr in response) {
+					   	   		$("#"+attr).val('');
+						   		$("#"+attr).val(response[attr]);
+			    			}
+			    			cargarCombosEdit();
+			    		}
 
 		    			
 					});   
@@ -367,13 +381,14 @@ function clear_form_elements(ele) {
 	});
 
 	function readURL(input, img) {
-	 if (input.files && input.files[0]) {
-	  var reader = new FileReader();
-	  reader.onload = function (e) {
-	   $(img).attr('src', e.target.result);
-	  }
-	  reader.readAsDataURL(input.files[0]);
-	 }
+		 if (input.files && input.files[0]) {
+			  var reader = new FileReader();
+			  
+			  reader.onload = function (e) {
+			   		$(img).attr('src', e.target.result);
+			  }
+			  reader.readAsDataURL(input.files[0]);
+		 }
 	}
 
 	function browseURL(path,path2){
@@ -382,7 +397,7 @@ function clear_form_elements(ele) {
 		});
 	}
 	//browseURL('id_input_file','id_imagen')
-	browseURL('#fotoCarnet','#idImg');
+	browseURL('#ruta','#idImg');
 
 	</script>
 

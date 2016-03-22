@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }} ">
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/chosen/chosen.css') }} ">
 	<link rel="stylesheet" type="text/css" href="{{ asset('plugins/datepicker/css/datepicker.css') }} ">
+	@yield('css')
 
 </head>
 <body>
