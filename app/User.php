@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -67,6 +68,15 @@ class User extends Authenticatable
     public function imagens() 
     {
        return $this->hasMany('App\Imagen');
+
+    }
+
+    public function imagens_consulta() 
+    {
+       return DB::table('users')
+            ->leftJoin('imagens','imagens.user_id','=','users.id')
+            ->select('users.*','imagens.nombre')
+            ->where('users.id',$this->id)->first();
 
     }
 

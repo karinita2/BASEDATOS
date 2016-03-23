@@ -328,56 +328,82 @@ function clear_form_elements(ele) {
 }
 
 	$("#cedula").blur(function(event){
-		//console.log(event.target.value);
-		$.get('/registro/docentes/'+event.target.value+'/getVerificaCedulaDocente', function(response, state){
 
-			if(response!=0){
-			   for (var attr in response) {
-		         
-			   		$("#"+attr).val(response[attr]);
-   				}
-   			}
-   			
-   			$.get('/registro/docentes/'+event.target.value+'/getTrabajadorJSON', function(response, state){
+		if(event.target.value!=""){
+			//console.log(event.target.value);
+			$.get('/registro/docentes/'+event.target.value+'/getVerificaCedulaDocente', function(response, state){
 
-				   	if(response!=0){
-					   for (var attr in response) {
-				         	
-					   		$("#"+attr).val(response[attr]);
-		    			}	
-		   			}
-
-					$.get('/registro/docentes/'+event.target.value+'/getUsuarioJSON', function(response, state){
-						if(response!=0){
-							$("#estado").val(response.estado_id);
-			    			$("#municipio").val(response.municipio_id);
-							$("#parroquia").val(response.parroquia_id);
-							//console.log(response.parroquia_id);
+				if(response!=0){
+				   for (var attr in response) {
+			         	
+				   		$("#"+attr).val(response[attr]);
+	   				}
+	   			}
+	   			
+	   			$.get('/registro/docentes/'+event.target.value+'/getTrabajadorJSON', function(response, state){
+	   					//console.log();
+	   					//si response[0]=="" entonces quiere decir que el json de datos de trabajador
+	   					//se encuentra lleno
+	   					//console.log(response[0]);
+					   	if(typeof(response[0])== "undefined"){
 						   for (var attr in response) {
-					   	   		$("#"+attr).val('');
+					         	
 						   		$("#"+attr).val(response[attr]);
-			    			}
-			    			cargarCombosEdit();
-			    		}
+			    			
+			    			}	
+			   			}
+			   			//cuando no solo trae los nombres de los atributos entonces response[0]!=""
+			   			else {
+ 							for (var attr in response) {
+					         	
+						   		$("#"+response[attr]).val('');
+			    			
+			    			}	
 
-		    			
-					});   
-			}); 
+			   			}
+
+						$.get('/registro/docentes/'+event.target.value+'/getUsuarioJSON', function(response, state){
+							if(typeof(response[0])== "undefined"){
+								$("#estado").val(response.estado_id);
+				    			$("#municipio").val(response.municipio_id);
+								$("#parroquia").val(response.parroquia_id);
+								//console.log(response.parroquia_id);
+							   for (var attr in response) {
+						   	   		$("#"+attr).val('');
+							   		$("#"+attr).val(response[attr]);
+				    			}
+				    			$('#idImg').attr('src','/images/users/'+response.nombre);
+				    			cargarCombosEdit();
+				    		}
+				    					   			//cuando no solo trae los nombres de los atributos entonces response[0]!=""
+			   			else {
+ 							for (var attr in response) {
+					         	
+						   		$("#"+response[attr]).val('');
+			    			
+			    			}	
+
+			   			}
+
+			    			
+						});   
+				}); 
 
 
-    		//fin del if
-    		/*else {
+	    		//fin del if
+	    		/*else {
 
-    			$("#estado").val('');
-    			$("#municipio").val('');
-    			$("#parroquia").val('');
-				clear_form_elements('#docenteForm');
-				//console.log($("#estado").val());
+	    			$("#estado").val('');
+	    			$("#municipio").val('');
+	    			$("#parroquia").val('');
+					clear_form_elements('#docenteForm');
+					//console.log($("#estado").val());
 
 
 
-    		}//fin del else*/
-		});
+	    		}//fin del else*/
+			});
+		}
 	});
 
 	function readURL(input, img) {

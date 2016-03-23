@@ -133,6 +133,34 @@ class DocentesController extends Controller
                       $docente->id=$user->id;
                       $docente->save();
 
+                      //verificamos si se ha enviado una imagen 
+                      if($request->file('ruta')){
+                          //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+                          $count = Imagen::where('user_id',$user->id)->count();
+                          if($count==0){
+                              //como no existe una imagen asociada a el usuario dado
+                              //entonces procedemos a guardarla como nueva y a asociarla
+                              $image= new Imagen();
+                              $image->setNombreAttribute($request->file('ruta'));
+                              $image->user()->associate($user);
+                              //dd($image);
+                              $image->save();
+                          }
+                          else {
+                              //si existe la imagen asociada a el usuario entonces procedemos
+                              //a actualizar la imagen
+                              $image = Imagen::where('user_id',$user->id);
+                              //$image->fill($request->all());
+                              $image->setNombreAttribute($request->file('ruta'));
+                              $image->save(); 
+
+                          }
+                      }
+
+
+
+
+
                       Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
                       return redirect()->route('registro.docentes.index');
 
@@ -262,14 +290,16 @@ class DocentesController extends Controller
                       if($count==1){
                           //$user = User::where('cedula',$id)->first();
                           $docente = Docente::find($user->id);
-                             return response()->json($docente);
+                          return response()->json($docente);
                       }
                       else {
-                          return '0';
+                          $docente=new Docente;
+                          return response()->json($docente->getFillable());
                       }
                 }
                 else {
-                          return '0';
+                          $docente=new Docente;
+                          return response()->json($docente->getFillable());
                 }
           
            //$municipios = Municipio::municipios($id);
@@ -296,11 +326,13 @@ class DocentesController extends Controller
                         return response()->json($trabajador);
                     }
                     else {
-                        return '0';
+                          $trabajador=new Trabajador;
+                          return $trabajador->getFillable();
                     }
                 }
                 else {
-                        return '0';
+                        $trabajador=new Trabajador;
+                        return $trabajador->getFillable();
                 }
 
 
@@ -311,19 +343,35 @@ class DocentesController extends Controller
     {
         
           if($request->ajax()){
-
-                  $user = User::where('cedula',$id)->first();
+                  
+        //dd($user->imagens_consulta());
+                  
                   $count = User::where('cedula',$id)->count();
                   if($count==1){
+                      $user = User::where('cedula',$id)->first();
+
                       //$user = User::find($id);
                       $fe_nac_format = Carbon::createFromFormat('Y-m-d', $user->fe_nac)->format('d/m/Y');
                       $edad= Carbon::createFromFormat('Y-m-d', $user->fe_nac)->diff(Carbon::now())->format('%y');
-                      $user->fe_nac= $fe_nac_format;
-                      $user->edad= $edad;
-                      return response()->json($user);
+                      //$user
+                      
+                      $var=$user->imagens_consulta();
+                      $var->fe_nac= $fe_nac_format;
+                      $var->edad= $edad;
+                      return response()->json($var);
                   }
                   else {
-                        return '0';
+                        $user=new User;
+                        $campos = $user->getFillable();
+                        //se añade la edad como elemmento de datos de usuario
+                        //para que pueda ser borrado su valor en el formulario
+                        array_push ( $campos , "edad" );
+                       //se elimina el campo cedula para que su valor no pueda ser 
+                        //eliminado del campo de formulario
+                       if(($key = array_search("cedula", $campos)) !== false) {
+                            unset($campos[$key]);
+                       }
+                       return response()->json($campos);
                   }
          }
     }
