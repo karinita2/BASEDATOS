@@ -25,13 +25,14 @@ class DocentesController extends Controller
      */
     public function index()
     {
-        //dd("aqui");
+        
         $docentes = Docente::orderBy('id', 'ASC')->paginate(5);
         $docentes->each(function($docentes){
             $docentes->trabajador;
+
            
         });
-        //dd($docentes);
+        //dd($docentes->first()->trabajador->user->imagens->first()->nombre);
         return view('registro.docentes.index')->with('docentes', $docentes);
     }
 
@@ -253,10 +254,20 @@ class DocentesController extends Controller
             //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
             if($request->file('ruta')){
                 //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
-                $image= Imagen::where('user_id',$user->id)->first();
-                $image->setNombreAttribute($request->file('ruta'));
-                //$image->user()->associate($user);
-                //dd($image);
+                
+                $count = Imagen::where('user_id',$user->id)->count();
+                if($count==0){
+                    $image= new Imagen();
+                    $image->setNombreAttribute($request->file('ruta'));
+                    $image->user()->associate($user);
+                }
+                else{
+                  $image= Imagen::where('user_id',$user->id)->first();
+                  $image->setNombreAttribute($request->file('ruta'));
+                  //$image->user()->associate($user);
+                  //dd($image);
+                  
+                }
                 $image->save();
             }
 

@@ -9,8 +9,7 @@ class Imagen extends Model
     
 
 
-    protected $fillable = [
-        'nombre', 'user_id','tipo','user_id'];
+    protected $fillable = ['nombre', 'tipo', 'user_id'];
 
     public function user()
     {
@@ -22,7 +21,7 @@ class Imagen extends Model
         $name = 'aponwao_'. date('d-m-Y').'_'.time() . '_' .rand(11111,99999).'.'. $file->getClientOriginalExtension();
         $path = public_path() . '/images/users/';
         // Verificamos Si hay un nombre de archivo
-        if($this->attributes['nombre']==""){
+        if(!isset($this->attributes['nombre'])){
             //Si no hay nombre de archivo entonces procedemos a guardar la imagen
             //Guardar una imagen nueva
              $this->attributes['nombre'] = $name;
