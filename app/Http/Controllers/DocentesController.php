@@ -75,15 +75,18 @@ class DocentesController extends Controller
 
             //luego guardo los valores asociados al trabajador
             $trabajador = new Trabajador($request->all());
-            $trabajador->id=$user->id;
+            $trabajador->user()->associate($user);
+            //$trabajador->id=$user->id;
             $trabajador->save();
+
 
             //luego guardo los datos de docente
             $docente = new Docente($request->all());
-            $docente->id=$user->id;
+            $docente->trabajador()->associate($user);
             $docente->save();
 
             //verificamos si se ha enviado una imagen 
+            //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
             if($request->file('ruta')){
                 //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
                 $image= new Imagen();
@@ -92,7 +95,6 @@ class DocentesController extends Controller
                 //dd($image);
                 $image->save();
             }
-
             Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
             return redirect()->route('registro.docentes.index');
         }
@@ -246,6 +248,17 @@ class DocentesController extends Controller
             $docente = Docente::find($user->id);
             $docente->fill($request->all());
             $docente->save();
+
+              //verificamos si se ha enviado una imagen 
+            //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+            if($request->file('ruta')){
+                //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+                $image= Imagen::where('user_id',$user->id)->first();
+                $image->setNombreAttribute($request->file('ruta'));
+                //$image->user()->associate($user);
+                //dd($image);
+                $image->save();
+            }
 
             Flash::success("Se ha actualizado el docente: ".$user->nombre1. " ".$user->apellido1 );
             return redirect()->route('registro.docentes.index');
