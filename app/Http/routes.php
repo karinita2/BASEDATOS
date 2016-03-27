@@ -137,10 +137,6 @@ Route::group(['middleware' => 'web'], function () {
 
 
 
-
-
-
-
 	Route::group(['prefix' => 'config'], function () {
 		
 		Route::resource('rutas', 'RutasController');

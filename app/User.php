@@ -79,5 +79,14 @@ class User extends Authenticatable
             ->where('users.id',$this->id)->first();
 
     }
+    public function fotoCarnet() 
+    {
+       return DB::table('users')
+            ->leftJoin('imagens','imagens.user_id','=','users.id')
+            ->select('users.*','imagens.nombre')
+            ->where('imagens.tipo','C')
+            ->where('users.id',$this->id)->first();
+
+    }
 
 }

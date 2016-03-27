@@ -24,7 +24,7 @@
 					<td>{{ $docente->trabajador->user->nombre1 . " ". $docente->trabajador->user->nombre2  }}</td>
 					<td>{{ $docente->trabajador->user->apellido1. " ".$docente->trabajador->user->apellido2  }}</td>
 					@if(isset($docente->trabajador->user->imagens->first()->nombre))
-					<td>{!! Html::image(asset("/images/users/".$docente->trabajador->user->imagens->first()->nombre),'Subir Foto',array('class' => 'img-rounded idImg',
+					<td>{!! Html::image(asset("/images/users/".$docente->trabajador->user->fotoCarnet()->nombre),'Subir Foto',array('class' => 'img-rounded idImg',
 						'id'=>'idImg', 'width' => '140px', 'height' => '120px')) !!}</td>
 					
 					@else 

@@ -253,16 +253,17 @@
 		  <div class="col-xs-3">
 		   
 		  	    <div class="form-group">
-					</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		  <div class="form-group">
-
 				</div>
 		  </div>
 		  <div class="col-xs-3">
-		   		 <div class="form-group">
-						{!! Form::submit('Guardar', array('class' => 'btn btn-primary pull-right')) !!}
+		   		  <div class="form-group">
+					
+				</div>
+		  </div>
+		  <div class="col-xs-3">
+		   		 <div class="form-group pull-right">
+		   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" >Limpiar</button>
+						{!! Form::submit('Guardar', array('class' => 'btn btn-primary')) !!}
 				</div>
 		  </div>
 		</div>
@@ -288,145 +289,23 @@
 @endsection
 
 @section('js') 
-
 	<script src="{{ asset('js/dropdownstate.js') }}"></script>
 	<script src="{{ asset('js/dropdowneditstate.js') }}"></script>
+	<script src="{{ asset('js/funcionesutilitarias.js') }}"></script>
+	<script src="{{ asset('js/registrousuarios.js') }}"></script>
 	<script >
-		$('.datepicker').datepicker({
-			format: 'dd/mm/yyyy',
-		}).on('changeDate', function (ev) {
-			 $.get('/registro/docentes/'+ $("#fe_nac").val().replace(/\//g,"-") +'/getEdad', function(response, state){
-
-				$("#edad").val(response);
-			});
-		});
-		jQuery.fn.reset = function () {
-						  $(this).each (function() { this.reset(); });
-						}
-	
-
-function clear_form_elements(ele) {
-
-        $(ele).find(':input').each(function() {
-            switch(this.type) {
-                case 'password':
-                case 'select-multiple':
-                case 'select-one':
-                case 'text':
-                case 'textarea':
-                case 'email':
-                //case 'hidden':
-                
-                
-                    $(this).val('');
-                    break;
-                case 'checkbox':
-                case 'radio':
-                    this.checked = false;
-            }
-        });
-}
-
-	$("#cedula").blur(function(event){
-
-		if(event.target.value!=""){
-			//console.log(event.target.value);
-			$.get('/registro/docentes/'+event.target.value+'/getVerificaCedulaDocente', function(response, state){
-
-				if(response!=0){
-				   for (var attr in response) {
-			         	
-				   		$("#"+attr).val(response[attr]);
-	   				}
-	   			}
-	   			
-	   			$.get('/registro/docentes/'+event.target.value+'/getTrabajadorJSON', function(response, state){
-	   					//console.log();
-	   					//si response[0]=="" entonces quiere decir que el json de datos de trabajador
-	   					//se encuentra lleno
-	   					//console.log(response[0]);
-					   	if(typeof(response[0])== "undefined"){
-						   for (var attr in response) {
-					         	
-						   		$("#"+attr).val(response[attr]);
-			    			
-			    			}	
-			   			}
-			   			//cuando no solo trae los nombres de los atributos entonces response[0]!=""
-			   			else {
- 							for (var attr in response) {
-					         	
-						   		$("#"+response[attr]).val('');
-			    			
-			    			}	
-
-			   			}
-
-						$.get('/registro/docentes/'+event.target.value+'/getUsuarioJSON', function(response, state){
-							if(typeof(response[0])== "undefined"){
-								$("#estado").val(response.estado_id);
-				    			$("#municipio").val(response.municipio_id);
-								$("#parroquia").val(response.parroquia_id);
-								//console.log(response.parroquia_id);
-							   for (var attr in response) {
-						   	   		$("#"+attr).val('');
-							   		$("#"+attr).val(response[attr]);
-				    			}
-				    			$('#idImg').attr('src','/images/users/'+response.nombre);
-				    			cargarCombosEdit();
-				    		}
-				    					   			//cuando no solo trae los nombres de los atributos entonces response[0]!=""
-			   			else {
- 							for (var attr in response) {
-					         	
-						   		$("#"+response[attr]).val('');
-			    			
-			    			}	
-
-			   			}
-
-			    			
-						});   
-				}); 
-
-
-	    		//fin del if
-	    		/*else {
-
-	    			$("#estado").val('');
-	    			$("#municipio").val('');
-	    			$("#parroquia").val('');
-					clear_form_elements('#docenteForm');
-					//console.log($("#estado").val());
-
-
-
-	    		}//fin del else*/
-			});
-		}
-	});
-
-	function readURL(input, img) {
-		 if (input.files && input.files[0]) {
-			  var reader = new FileReader();
-			  
-			  reader.onload = function (e) {
-			   		$(img).attr('src', e.target.result);
-			  }
-			  reader.readAsDataURL(input.files[0]);
-		 }
-	}
-
-	function browseURL(path,path2){
-		$(path).change(function(){
-		 readURL(this,path2);
-		});
-	}
 	//browseURL('id_input_file','id_imagen')
 	browseURL('#ruta','#idImg');
 
-	</script>
+	//para borrar los formularios
+	function limpiarFormRegistro(form,img){
 
+	    if(confirm('Seguro que desea limpiar el formulario (borrar los datos)?')){
+	        $(img).attr('src',"{{ asset('images/sin-foto.gif') }}");
+	        $(form).reset();
+	    }
+	}
+	</script>
 @endsection	
 
 

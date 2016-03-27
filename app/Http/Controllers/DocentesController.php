@@ -15,6 +15,7 @@ use App\Docente;
 use App\Imagen;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
+use App\Http\Requests\DocenteRequest;
 
 class DocentesController extends Controller
 {
@@ -32,7 +33,7 @@ class DocentesController extends Controller
 
            
         });
-        //dd($docentes->first()->trabajador->user->imagens->first()->nombre);
+        //dd($docentes->first()->trabajador->user->fotoCarnet()->nombre);
         return view('registro.docentes.index')->with('docentes', $docentes);
     }
 
@@ -60,7 +61,7 @@ class DocentesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DocenteRequest $request)
     {
 
         $count = User::where('cedula',$request->cedula)->count();
@@ -190,6 +191,28 @@ class DocentesController extends Controller
                       $docente->id=$user->id;
                       $docente->save();
 
+
+                      //verificamos si se ha enviado una imagen 
+                      //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+                      if($request->file('ruta')){
+                          //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
+                          
+                          $count = Imagen::where('user_id',$user->id)->count();
+                          if($count==0){
+                              $image= new Imagen();
+                              $image->setNombreAttribute($request->file('ruta'));
+                              $image->user()->associate($user);
+                          }
+                          else{
+                            $image= Imagen::where('user_id',$user->id)->first();
+                            $image->setNombreAttribute($request->file('ruta'));
+                            //$image->user()->associate($user);
+                            //dd($image);
+                            
+                          }
+                          $image->save();
+                      }
+
                       Flash::success("Se ha registrado el docente: ".$user->nombre1. " ".$user->apellido1 );
                       return redirect()->route('registro.docentes.index');
 
@@ -228,7 +251,7 @@ class DocentesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DocenteRequest $request, $id)
     {
             //dd('actualizar docente');
             
@@ -273,9 +296,6 @@ class DocentesController extends Controller
 
             Flash::success("Se ha actualizado el docente: ".$user->nombre1. " ".$user->apellido1 );
             return redirect()->route('registro.docentes.index');
-
-
-
     }
 
     /**
