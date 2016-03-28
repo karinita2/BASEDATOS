@@ -7,8 +7,8 @@ Comprende los siguientes módulos:
 
 Administración / En desarrollo por Fabricio Bravo Guevara
 Registro / En desarrollo por Fabricio Bravo Guevara
-Evaluación / En desarrollo por Felix Blanco Evariste
-Reportes / Desarrollado por Fabricio Bravo Guevara
+Evaluación / En desarrollo por Félix Blanco Evariste
+Reportes / En Desarrollo por Fabricio Bravo Guevara
 
 ## Licencia
 

@@ -241,7 +241,25 @@ class DocentesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $docente = Docente::find($id);
+        $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
+        $filiales = Filial::orderBy('filial', 'ASC')->lists('filial','id');
+        $nominas = Nomina::orderBy('nomina', 'ASC')->lists('nomina','id');
+        $nivel_estudios = NivelEstudio::orderBy('nivel', 'ASC')->lists('nivel','id');   
+
+        $fe_nac_format = Carbon::createFromFormat('Y-m-d', $docente->trabajador->user->fe_nac)->format('d/m/Y');
+        $edad= Carbon::createFromFormat('Y-m-d', $docente->trabajador->user->fe_nac)->diff(Carbon::now())->format('%y');
+                      //$user
+          $docente->trabajador->user->fe_nac= $fe_nac_format;
+          $docente->trabajador->user->edad= $edad;
+
+         return view('registro.docentes.edit')
+         ->with('docente',$docente)
+         ->with('estados',$estados)
+         ->with('filiales', $filiales)
+         ->with('nominas', $nominas)
+         ->with('nivel_estudios', $nivel_estudios);
+      
     }
 
     /**
