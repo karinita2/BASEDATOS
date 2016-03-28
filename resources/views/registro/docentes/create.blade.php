@@ -11,13 +11,13 @@
 	    <div class="row">
 		  <div class="col-xs-3">
 		   	    <div class="form-group">
-					</div>
-		  			</div>
+				</div>
+		  </div>
 		  <div class="col-xs-3">
 		   		  <div class="form-group">
-					</div>
+				  </div>
 
-		  			</div>
+		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group">
 		   		 	 <div class="panel panel-default pull-right" style="width:195px; height:220px;">
@@ -262,8 +262,8 @@
 		  </div>
 		  <div class="col-xs-3">
 		   		 <div class="form-group pull-right">
-		   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" >Limpiar</button>
-						{!! Form::submit('Guardar', array('class' => 'btn btn-primary')) !!}
+		   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" ><span class="glyphicon glyphicon-retweet" aria-hidden= "true"></span> Limpiar</button>
+						{!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', array('class'=>'btn btn-primary', 'type'=>'submit')) !!}
 				</div>
 		  </div>
 		</div>
