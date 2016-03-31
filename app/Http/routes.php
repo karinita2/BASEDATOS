@@ -61,6 +61,17 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/', function () {
     	return view('welcome');
 	});
+	/*
+	Route::get('foo', function () {
+	    return 'Hello World';
+	});*/
+
+	Route::get('public/foo', ['as' => 'foo', function () {
+	   return view('welcome');
+	}]);
+
+
+
 	
 	Route::group(['prefix' => 'config'], function () {
 		

@@ -47,6 +47,7 @@
             <li><a href="#">Alumnos</a></li>
             <li><a href="#">Representantes</a></li>
             <li><a href="{{ route('registro.docentes.index') }}">Docentes</a></li>
+  
           </ul>
         </li>
                
