@@ -5,7 +5,7 @@
 @section('content')
 	
 	<div align="right"> 
-		<a href="{{ route('registro.docentes.create') }}" class="btn btn-primary">Registrar Docente</a>
+		<a href="{{ route('registro.docentes.create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Registrar Docente</a>
 	</div>
 
 	<table class="table table-striped">

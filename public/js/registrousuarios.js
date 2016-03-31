@@ -62,6 +62,7 @@ $("#cedula").blur(function(event){
 				    			}
 				    			$('#idImg').attr('src','/images/users/'+response.nombre);
 				    			cargarCombosEdit();
+				    			cargarMateriasDocente();
 				    		}
 				    		//cuando no solo trae los nombres de los atributos entonces response[0]!=""
 				   			/*

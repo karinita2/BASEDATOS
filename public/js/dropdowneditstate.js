@@ -35,3 +35,15 @@ function cargarCombosEdit(){
 
 }
 
+//Para cargar las materias asignadas a un docente
+function cargarMateriasDocente(){
+	$.get('/registro/docentes/'+$("#cedula").val()+'/getMateriasDocente', function(response, state){
+			
+			//$("#materia_config_id").empty();
+			//$("#materia_config_id").append("<option value='0'>Seleccione un municipio</option>");
+			$('#materia_config_id').val(response);
+
+			$('#materia_config_id').trigger("chosen:updated");
+			
+		});
+}

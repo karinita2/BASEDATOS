@@ -233,6 +233,14 @@ Route::group(['middleware' => 'web'], function () {
 			'uses' => 'DocentesController@getUsuarioJSON',
 			'as'   => 'registro.docentes.getUsuarioJSON'
 			]);
+		//para obtener las materias asociadas a un docente
+		Route::get('/docentes/{id}/getMateriasDocente', [
+			'uses' => 'DocentesController@getMateriasDocente',
+			'as'   => 'registro.docentes.getMateriasDocente'
+			]);
+
+
+
 
 	});
 

@@ -4,7 +4,7 @@
 
 @section('content')
  <div class="col-md-12 col-md-offset-1">
-{!! Form::open(array('route' => ['config.rutas.update',$docente->id], 'method' => 'PUT', 'id' => 'docenteForm',  'files' => 'true')) !!}
+{!! Form::open(array('route' => ['registro.docentes.update',$docente->id], 'method' => 'PUT', 'id' => 'docenteForm',  'files' => 'true')) !!}
     
    
    
@@ -127,7 +127,7 @@
 		   		  <div class="form-group">
 					{!! Form::label('estado_id','Estado') !!}
 					{!! Form::select('estado_id',$estados, $docente->trabajador->user->estado_id, ['class' => 'form-control  select-tag', 'required', 'id'=>'estado_id','placeholder'=>'Selecciona un estado','tabindex'=>'12'] ) !!}
-					{!! Form::hidden('estado', null, ['id'=>'estado']) !!} 
+					{!! Form::hidden('estado', $docente->trabajador->user->estado_id, ['id'=>'estado']) !!} 
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -151,7 +151,7 @@
 		   		  <div class="form-group">
 					{!! Form::label('municipio_id','Municipio') !!}
 					{!! Form::select('municipio_id',[], null, ['class' => 'form-control  select-tag', 'required', 'id'=>'municipio_id','placeholder'=>'Selecciona un municipio','tabindex'=>'13'] ) !!}
-					{!! Form::hidden('municipio', null, ['id'=>'municipio']) !!} 
+					{!! Form::hidden('municipio', $docente->trabajador->user->municipio_id, ['id'=>'municipio']) !!} 
 
 
 
@@ -178,7 +178,7 @@
 		   		  <div class="form-group">
 					{!! Form::label('parroquia_id','Parroquia') !!}
 					{!! Form::select('parroquia_id',[], null, ['class' => 'form-control  select-tag', 'required', 'id'=>'parroquia_id','placeholder'=>'Selecciona una parroquia','tabindex'=>'14'] ) !!}
-					{!! Form::hidden('parroquia', null, ['id'=>'parroquia']) !!} 
+					{!! Form::hidden('parroquia', $docente->trabajador->user->parroquia_id, ['id'=>'parroquia']) !!} 
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -244,33 +244,25 @@
 					{!! Form::text('lugar_nacimiento',$docente->trabajador->user->lugar_nacimiento, ['class' => 'form-control', 'placeholder' => 'Lugar de Nacimiento', 'required','tabindex'=>'8'] ) !!}
 				</div>
 		  </div>
-		  <div class="col-xs-3">
+		  <div class="col-xs-6">
 		   		  <div class="form-group">
-
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		 <div class="form-group">
-
+					{!! Form::label('materias','Materias') !!}
+					{!! Form::select('materia_config_id[]',$materias, $my_materias, ['class' => 'form-control  select-tag2', 'multiple', 'required'] ) !!} 
 				</div>
 		  </div>
 		</div>
 
 	    <div class="row">
-		  <div class="col-xs-3">
-		   
-		  	    <div class="form-group">
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		  <div class="form-group">
-					
-				</div>
-		  </div>
-		  <div class="col-xs-3">
+		  <div class="col-xs-9">
 		   		 <div class="form-group pull-right">
-		   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" ><span class="glyphicon glyphicon-retweet" aria-hidden= "true"></span> Limpiar</button>
-						{!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', array('class'=>'btn btn-primary', 'type'=>'submit')) !!}
+
+							<a href="{{ route('registro.docentes.index') }}" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar</a>
+
+			   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" ><span class="glyphicon glyphicon-retweet" aria-hidden= "true"></span> Limpiar</button>
+			   		 		
+							{!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', array('class'=>'btn btn-primary', 'type'=>'submit')) !!}
+
+
 				</div>
 		  </div>
 		</div>
@@ -315,10 +307,13 @@
 
 	$(document).on('ready',function(e){
 
-			alert('hola');
 			cargarCombosEdit();	
 	});
 
+	$('.select-tag2').chosen({ 
+						placeholder_text_multiple: 'Seleccione las materias asociados', 
+						no_results_text: 'No se encontraron resultados' 
+	}); 
 
 
 

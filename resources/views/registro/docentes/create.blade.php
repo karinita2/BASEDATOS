@@ -11,6 +11,7 @@
 	    <div class="row">
 		  <div class="col-xs-3">
 		   	    <div class="form-group">
+
 				</div>
 		  </div>
 		  <div class="col-xs-3">
@@ -235,35 +236,28 @@
 		  	    <div class="form-group">
 					{!! Form::label('lugar_nacimiento','Lugar de Nacimiento') !!}
 					{!! Form::text('lugar_nacimiento',null, ['class' => 'form-control', 'placeholder' => 'Lugar de Nacimiento', 'required','tabindex'=>'8'] ) !!}
+
 				</div>
 		  </div>
-		  <div class="col-xs-3">
+		  <div class="col-xs-6">
 		   		  <div class="form-group">
-
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		 <div class="form-group">
-
+					{!! Form::label('materias','Materias') !!}
+					{!! Form::select('materia_config_id[]',$materias, null, ['class' => 'form-control  select-tag2', 'multiple', 'required', 'id'=>'materia_config_id'] ) !!} 
 				</div>
 		  </div>
 		</div>
 
 	    <div class="row">
-		  <div class="col-xs-3">
-		   
-		  	    <div class="form-group">
-				</div>
-		  </div>
-		  <div class="col-xs-3">
-		   		  <div class="form-group">
-					
-				</div>
-		  </div>
-		  <div class="col-xs-3">
+		  <div class="col-xs-9">
 		   		 <div class="form-group pull-right">
-		   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" ><span class="glyphicon glyphicon-retweet" aria-hidden= "true"></span> Limpiar</button>
-						{!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', array('class'=>'btn btn-primary', 'type'=>'submit')) !!}
+
+								<a href="{{ route('registro.docentes.index') }}" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar</a>
+
+				   		 		<button type="button" class="btn btn-success" onclick="limpiarFormRegistro('#docenteForm','#idImg');" ><span class="glyphicon glyphicon-retweet" aria-hidden= "true"></span> Limpiar</button>
+				   		 		
+								{!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Guardar', array('class'=>'btn btn-primary', 'type'=>'submit')) !!}
+
+
 				</div>
 		  </div>
 		</div>
@@ -305,6 +299,16 @@
 	        $(form).reset();
 	    }
 	}
+
+	$('.select-tag2').chosen({ 
+					placeholder_text_multiple: 'Seleccione las materias asociados', 
+					no_results_text: 'No se encontraron resultados' 
+	}); 
+
+
+
+
+
 	</script>
 @endsection	
 

@@ -28,5 +28,9 @@ class Docente extends Model
         return $this->belongsTo('App\Trabajador','id','id');
     }
 
+    public function materia_configs() 
+    {
+        return $this->belongsToMany('App\MateriaConfig');
+    }
 
 }

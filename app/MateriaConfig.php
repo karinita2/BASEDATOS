@@ -25,7 +25,12 @@ class MateriaConfig extends Model
 
     public function getFullNameAttribute() 
     {
-        return $this->institucion_config->institucion->institucion . " / ". $this->institucion_config->grado->grado ." / ". $this->institucion_config->seccion->seccion;
+        return $this->institucion_config->institucion->institucion . " | ". $this->institucion_config->grado->grado ." | ". $this->institucion_config->seccion->seccion." | ". $this->materia->materia;
+    }
+
+    public function docentes() 
+    {
+        return $this->belongsToMany('App\Docente');
     }
 
 

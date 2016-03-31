@@ -16,6 +16,7 @@ use App\Imagen;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 use App\Http\Requests\DocenteRequest;
+use App\MateriaConfig;
 
 class DocentesController extends Controller
 {
@@ -48,11 +49,15 @@ class DocentesController extends Controller
         $filiales = Filial::orderBy('filial', 'ASC')->lists('filial','id');
         $nominas = Nomina::orderBy('nomina', 'ASC')->lists('nomina','id');
         $nivel_estudios = NivelEstudio::orderBy('nivel', 'ASC')->lists('nivel','id');
+        $materias = MateriaConfig::get()->lists('full_name','id');
+
         return view('registro.docentes.create')
         ->with('estados', $estados)
         ->with('filiales', $filiales)
         ->with('nominas', $nominas)
-        ->with('nivel_estudios', $nivel_estudios);
+        ->with('nivel_estudios', $nivel_estudios)
+        ->with('materias',$materias);
+   
     }
 
     /**
@@ -64,6 +69,7 @@ class DocentesController extends Controller
     public function store(DocenteRequest $request)
     {
 
+        //dd($request->all());
         $count = User::where('cedula',$request->cedula)->count();
         //Primero guardo los valores asociados a un usuario
         //Si no existe en la tabla de usuarios, entonces se procede a la carga completa
@@ -86,6 +92,10 @@ class DocentesController extends Controller
             $docente = new Docente($request->all());
             $docente->trabajador()->associate($user);
             $docente->save();
+
+            $docente->materia_configs()->sync($request->materia_config_id); 
+
+
 
             //verificamos si se ha enviado una imagen 
             //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
@@ -136,6 +146,8 @@ class DocentesController extends Controller
                       $docente = new Docente($request->all());
                       $docente->id=$user->id;
                       $docente->save();
+
+                      $docente->materia_configs()->sync($request->materia_config_id); 
 
                       //verificamos si se ha enviado una imagen 
                       if($request->file('ruta')){
@@ -191,6 +203,7 @@ class DocentesController extends Controller
                       $docente->id=$user->id;
                       $docente->save();
 
+                      $docente->materia_configs()->sync($request->materia_config_id); 
 
                       //verificamos si se ha enviado una imagen 
                       //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
@@ -245,20 +258,25 @@ class DocentesController extends Controller
         $estados = Estado::orderBy('estado', 'ASC')->lists('estado','id');
         $filiales = Filial::orderBy('filial', 'ASC')->lists('filial','id');
         $nominas = Nomina::orderBy('nomina', 'ASC')->lists('nomina','id');
-        $nivel_estudios = NivelEstudio::orderBy('nivel', 'ASC')->lists('nivel','id');   
+        $nivel_estudios = NivelEstudio::orderBy('nivel', 'ASC')->lists('nivel','id');  
+        $materias = MateriaConfig::get()->lists('full_name','id'); 
 
         $fe_nac_format = Carbon::createFromFormat('Y-m-d', $docente->trabajador->user->fe_nac)->format('d/m/Y');
         $edad= Carbon::createFromFormat('Y-m-d', $docente->trabajador->user->fe_nac)->diff(Carbon::now())->format('%y');
                       //$user
-          $docente->trabajador->user->fe_nac= $fe_nac_format;
-          $docente->trabajador->user->edad= $edad;
+        $docente->trabajador->user->fe_nac= $fe_nac_format;
+        $docente->trabajador->user->edad= $edad;
+
+        $my_materias = $docente->materia_configs->lists('id')->ToArray(); 
 
          return view('registro.docentes.edit')
          ->with('docente',$docente)
          ->with('estados',$estados)
          ->with('filiales', $filiales)
          ->with('nominas', $nominas)
-         ->with('nivel_estudios', $nivel_estudios);
+         ->with('nivel_estudios', $nivel_estudios)
+         ->with('materias',$materias)
+         ->with('my_materias', $my_materias);
       
     }
 
@@ -290,6 +308,8 @@ class DocentesController extends Controller
             $docente = Docente::find($user->id);
             $docente->fill($request->all());
             $docente->save();
+
+            $docente->materia_configs()->sync($request->materia_config_id); 
 
               //verificamos si se ha enviado una imagen 
             //procedemos a guardar la imagen en la tabla de imagenes y a asociarla al usuario
@@ -352,6 +372,8 @@ class DocentesController extends Controller
                       if($count==1){
                           //$user = User::where('cedula',$id)->first();
                           $docente = Docente::find($user->id);
+                          $my_materias = $docente->materia_configs->lists('id')->ToArray(); 
+                          //array_push ( $docente , $my_materias );
                           return response()->json($docente);
                       }
                       else {
@@ -438,4 +460,23 @@ class DocentesController extends Controller
          }
     }
 
+    public function getMateriasDocente(Request $request, $id)
+    {
+        
+        if($request->ajax()){
+
+                $count = User::where('cedula',$id)->count();
+                
+                if($count==1){
+                  $user = User::where('cedula',$id)->first();
+                  $count = Docente::where('id',$user->id)->count();
+                    if($count==1){
+                        $docente = Docente::where('id',$user->id)->first();
+                        $my_materias = $docente->materia_configs->lists('id')->ToArray(); 
+                     
+                      return $my_materias;
+                    }
+                }
+        }
+    }
 }

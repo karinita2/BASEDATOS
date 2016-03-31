@@ -24,7 +24,7 @@ class CreateMateriaConfigsTable extends Migration
         });
 
 
-        Schema::create('materia_config_docente', function (Blueprint $table) {
+        Schema::create('docente_materia_config', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('materia_config_id')->unsigned();
             $table->integer('docente_id')->unsigned();

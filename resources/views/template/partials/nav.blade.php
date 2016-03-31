@@ -28,6 +28,7 @@
             <li><a href="{{ route('config.materia_configs.index') }}">Configurar Materias</a></li>
 
             <li><a href="{{ route('config.rutas.index') }}">Configurar Rutas Escolares</a></li>
+             
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('config.filiales.index') }}">Filiales</a></li>
             <li><a href="{{ route('config.nominas.index') }}">Nóminas</a></li>
@@ -44,6 +45,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registro <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Alumnos</a></li>
+            <li><a href="#">Representantes</a></li>
             <li><a href="{{ route('registro.docentes.index') }}">Docentes</a></li>
           </ul>
         </li>
