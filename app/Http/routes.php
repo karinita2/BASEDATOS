@@ -69,7 +69,8 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('public/foo', ['as' => 'foo', function () {
 	   return view('welcome');
 	}]);
-
+ 	
+Route::resource('excel','ExcelController');
 
 
 	
