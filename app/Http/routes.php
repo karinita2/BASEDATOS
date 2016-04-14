@@ -95,9 +95,15 @@ Route::resource('excel','ExcelController');
 
 
 	});
-
-
-
+	
+	Route::group(['prefix' => 'config'], function () {
+		
+		Route::resource('permisos', 'PermisosController');
+		Route::get('permisos/{id}/destroy', [
+			'uses' => 'PermisosController@destroy',
+			'as'   => 'config.permisos.destroy'
+			]);
+	});
 
 
 	Route::group(['prefix' => 'config'], function () {

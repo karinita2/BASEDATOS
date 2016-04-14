@@ -37,6 +37,7 @@
             <li><a href="{{ route('config.c_medicas.index') }}">Condiciones Médicas</a></li>
             <li><a href="{{ route('config.tallas.index') }}">Tallas</a></li>
             <li><a href="{{ route('config.nivel_estudios.index') }}">Niveles de Estudio</a></li>
+            <li><a href="{{ route('config.permisos.index') }}">Asignar Permisos</a></li>
           </ul>
         </li>
 
