@@ -1,15 +1,14 @@
-# APONWAO
+# KARINA
 ## Sistema para la Gestión Escolar - Actualmente en desarrollo
 
-El sistema APONWAO, es un sistema basado en laravel, bootstrap y jquery (como principales ingredientes) que permite llevar a cabo el control y seguimiento de los procedimientos administrativos, de planificación,  inscripción y evaluación Escolar. Esta herramienta facilita la toma de decisiones administrativas y gerenciales debido a la disponibilidad de información de forma organizada.
+El sistema KARINA, es un sistema basado en laravel, bootstrap y jquery (como principales ingredientes) que permite llevar a cabo el control y seguimiento de los procedimientos administrativos, de planificación,  inscripción y evaluación Escolar. Esta herramienta facilita la toma de decisiones administrativas y gerenciales debido a la disponibilidad de información de forma organizada.
 
 Comprende los siguientes módulos:
 
-Administración / En desarrollo por Fabricio Bravo Guevara
-Registro / En desarrollo por Fabricio Bravo Guevara
-Evaluación / En desarrollo por Félix Blanco Evariste
-Reportes / En Desarrollo por Fabricio Bravo Guevara
-
+Administración / En desarrollo por karina chavez
+Registro / En desarrollo por karina chavez
+Evaluación / En desarrollo por karina chavez
+Reportes / En Desarrollo por karina chavez
 ## Licencia
 
-Aponwao es un software código abierto bajo la licencia [MIT license](http://opensource.org/licenses/MIT).
+karina es un software código abierto bajo la licencia [MIT license](http://opensource.org/licenses/MIT).

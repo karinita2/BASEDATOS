@@ -18,7 +18,7 @@ class Imagen extends Model
 
     public function setNombreAttribute($file){
 
-        $name = 'aponwao_'. date('d-m-Y').'_'.time() . '_' .rand(11111,99999).'.'. $file->getClientOriginalExtension();
+        $name = 'base_'. date('d-m-Y').'_'.time() . '_' .rand(11111,99999).'.'. $file->getClientOriginalExtension();
         $path = public_path() . '/images/users/';
         // Verificamos Si hay un nombre de archivo
         if(!isset($this->attributes['nombre'])){
@@ -49,22 +49,8 @@ class Imagen extends Model
              }
         }
     }
-    /*
-    public function setNombreAttribute($fileName, $path,$defaultName=null){
-        $photo= null;
-        $file=Input::file($fileName);
-        //verificamos si hay una  immagen
-        if(Input::hasFile($fileName)){
-            $destinationPath = $path;
-            $extension       = $file->getClientOriginalExtension();
-            $name            = 'aponwao_'. date('d-m-Y').'_'.time() . '.' .rand(11111,99999).'.'.$extension;
-    	    $photo           = $destinationPath.'/'.$name;
-    	    $file->move($destinationPath,$name);
-         $this->attributes['nombre'] = $name;
-    	 $path = ;
-        
-        }
-    }*/
+    
+   
 
 
 }
